@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./ChatRoom.css";
 import useChat from "../useChat";
 import { useEffect } from "react";
@@ -26,6 +25,13 @@ const ChatRoom = ({ room }) => {
       <h1 className="room-name">Room: {roomId}</h1>
       <div className="messages-container">
         <ol className="messages-list">
+        <div id="welcome-msg">
+            <span>
+              welcome to {roomId} feel free to say anything all identites are
+              kept anonymous.
+            </span>
+            <sub>-Javascript Enthusiast-</sub>
+          </div>
           {messages.map((message, i) => (
             <li
               key={i}

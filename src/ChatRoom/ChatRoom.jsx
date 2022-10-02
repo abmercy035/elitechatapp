@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./ChatRoom.css";
 import useChat from "../useChat";
 import { useEffect } from "react";
@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const ChatRoom = ({ room }) => {
   const navigate = useNavigate();
   const roomId = room;
+  const inputEl = useRef(null);
   const { messages, sendMessage } = useChat(roomId);
   const [newMessage, setNewMessage] = React.useState("");
   const handleNewMessageChange = (event) => {
@@ -13,6 +14,7 @@ const ChatRoom = ({ room }) => {
   };
   useEffect(() => {
     if (!roomId) navigate("/");
+    inputEl.current.scrollIntoView({ behavior: "smooth" });
   });
 
   const handleSendMessage = () => {
@@ -25,7 +27,7 @@ const ChatRoom = ({ room }) => {
       <h1 className="room-name">Room: {roomId}</h1>
       <div className="messages-container">
         <ol className="messages-list">
-        <div id="welcome-msg">
+          <div id="welcome-msg">
             <span>
               welcome to {roomId} feel free to say anything all identites are
               kept anonymous.
@@ -43,16 +45,19 @@ const ChatRoom = ({ room }) => {
             </li>
           ))}
         </ol>
+        <div id="last-msg" ref={inputEl}></div>
       </div>
-      <textarea
-        value={newMessage}
-        onChange={handleNewMessageChange}
-        placeholder="Write message..."
-        className="new-message-input-field"
-      />
-      <button onClick={handleSendMessage} className="send-message-button">
-        Send
-      </button>
+      <footer id="footer">
+        <input
+          value={newMessage}
+          onChange={handleNewMessageChange}
+          placeholder="Write message..."
+          className="new-message-input-field"
+        />
+        <button onClick={handleSendMessage} className="send-message-button">
+          Send
+        </button>
+      </footer>
     </div>
   );
 };

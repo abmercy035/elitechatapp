@@ -13,6 +13,19 @@ const Home = ({ sendRoom }) => {
 
   return (
     <div className="home-container">
+
+<header id="login-header">
+        <h3>Elite Chat App</h3>
+      </header>
+      <blockquote>
+        Hello welcome to Elite multipurpose Chat App the App is mainly for students,
+        Stay with us as we integrate
+        more other functions that will benefit and aid efficient study.
+      <blockquote>
+        <b>Today will be An Anonymous Night to test the capability of this App. Thank you </b>
+      </blockquote>
+      </blockquote>
+
       <select
         type="text"
         placeholder="Room"
@@ -23,16 +36,16 @@ const Home = ({ sendRoom }) => {
         <option value="" disabled>
           Select A Room
         </option>
-        <optgroup label="anonymous 8:00-pm">
-          <option value="anonymous-100lvl">Anonymous 100l Level</option>
-          <option value="Anonymous-200lvl">Anonymous 200lvl 8:00-pm</option>
+        <optgroup label="anonymous 9:00-pm">
+          <option value="anonymous">Anonymous</option>
+          {/* <option value="Anonymous-200lvl">Anonymous 200lvl 8:00-pm</option> */}
         </optgroup>
-        <optgroup label="Scholars-Forum 8:00-pm">
+        {/* <optgroup label="Scholars-Forum 8:00-pm">
 
         <option value="scoholars-forum-100lvl">Scholars 100 level</option>
         <option value="scoholars-forum-200lvl">Scholars 200 level</option>
         </optgroup>
-        <option value="Counciling-forum">Council Group 9:00-pm</option>
+        <option value="Counciling-forum">Council Group 9:00-pm</option> */}
       </select>
 
       <button

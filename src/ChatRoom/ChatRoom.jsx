@@ -55,11 +55,19 @@ const ChatRoom = ({ room }) => {
         <input
           id="msg-input"
           value={newMessage}
+          onKeyDown={(e) => {
+            if(e.key === "enter") {
+              newMessage && handleSendMessage();
+            }
+          }}
           onChange={handleNewMessageChange}
           placeholder="Write message..."
           className="new-message-input-field"
         />
-        <button onClick={ newMessage && handleSendMessage} className="send-message-button">
+        <button
+          onClick={newMessage && handleSendMessage}
+          className="send-message-button"
+        >
           Send
         </button>
       </footer>

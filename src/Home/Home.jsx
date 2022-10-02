@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import "./Home.css";
 
-const Home = ({sendRoom}) => {
+const Home = ({ sendRoom }) => {
   const [roomName, setRoomName] = React.useState("");
   const navigate = useNavigate();
 
@@ -11,15 +11,25 @@ const Home = ({sendRoom}) => {
     setRoomName(event.target.value);
   };
 
-  const pageAccessedByReload = (
-    (window.performance.navigation && window.performance.navigation.type === 1) ||
-      window.performance
-        .getEntriesByType('navigation')
-        .map((nav) => nav.type)
-        .includes('reload')
-  );
-  // if(pageAccessedByReload){navigate('/')}
+  const pageAccessedByReload =
+    (window.performance.navigation &&
+      window.performance.navigation.type === 1) ||
+    window.performance
+      .getEntriesByType("navigation")
+      .map((nav) => nav.type)
+      .includes("reload");
 
+  const back = () => {
+    if (pageAccessedByReload && !roomName) {
+
+      navigate("/");
+      console.log("going back")
+    }
+  };
+
+  useEffect(()=>{
+    back()
+  }, [])
 
   return (
     <div className="home-container">
@@ -30,10 +40,13 @@ const Home = ({sendRoom}) => {
         onChange={handleRoomNameChange}
         className="text-input-field"
       />
-      <button onClick={()=>{sendRoom(roomName)
-         roomName && navigate("/chat")
-        }} className="enter-room-button">
-      
+      <button
+        onClick={() => {
+          sendRoom(roomName);
+          roomName && navigate("/chat");
+        }}
+        className="enter-room-button"
+      >
         Join room
       </button>
     </div>

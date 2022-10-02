@@ -2,19 +2,24 @@ import React from "react";
 
 import "./ChatRoom.css";
 import useChat from "../useChat";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 const ChatRoom = ({ room }) => {
+  const navigate = useNavigate();
   const roomId = room;
   const { messages, sendMessage } = useChat(roomId);
   const [newMessage, setNewMessage] = React.useState("");
   const handleNewMessageChange = (event) => {
     if (event.target.value) setNewMessage(event.target.value);
   };
-
+useEffect(()=>{
+  if(!room)navigate("/")
+}, [])
 
   const handleSendMessage = () => {
     sendMessage(newMessage);
     setNewMessage("");
-    
+
   };
 
   return (

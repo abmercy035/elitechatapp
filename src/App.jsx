@@ -1,16 +1,11 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 
 import "./index.css";
 import Home from "./Home/Home";
 import ChatRoom from "./ChatRoom/ChatRoom";
 
 function App() {
-
   const [roomVal, setRoomVal] = useState();
   const changeRoom = (value) => {
     if (value) {

@@ -11,35 +11,22 @@ const Home = ({ sendRoom }) => {
     setRoomName(event.target.value);
   };
 
-  const pageAccessedByReload =
-    (window.performance.navigation &&
-      window.performance.navigation.type === 1) ||
-    window.performance
-      .getEntriesByType("navigation")
-      .map((nav) => nav.type)
-      .includes("reload");
-
-  const back = () => {
-    if (pageAccessedByReload && !roomName) {
-
-      navigate("/");
-      console.log("going back")
-    }
-  };
-
-  useEffect(()=>{
-    back()
-  }, [])
-
   return (
     <div className="home-container">
-      <input
+      <select
         type="text"
         placeholder="Room"
         value={roomName}
         onChange={handleRoomNameChange}
         className="text-input-field"
-      />
+      >
+        <option value="" disabled>
+          Select A Room
+        </option>
+        <option value="anonymous-chat">Anonymous</option>
+        <option value="scoholars-forum">Scholars</option>
+      </select>
+
       <button
         onClick={() => {
           sendRoom(roomName);

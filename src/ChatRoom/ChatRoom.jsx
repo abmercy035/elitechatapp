@@ -12,14 +12,13 @@ const ChatRoom = ({ room }) => {
   const handleNewMessageChange = (event) => {
     if (event.target.value) setNewMessage(event.target.value);
   };
-useEffect(()=>{
-  if(!roomId)navigate("/")
-},)
+  useEffect(() => {
+    if (!roomId) navigate("/");
+  });
 
   const handleSendMessage = () => {
     sendMessage(newMessage);
     setNewMessage("");
-
   };
 
   return (

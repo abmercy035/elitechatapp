@@ -23,8 +23,16 @@ const Home = ({ sendRoom }) => {
         <option value="" disabled>
           Select A Room
         </option>
-        <option value="anonymous-chat">Anonymous</option>
-        <option value="scoholars-forum">Scholars</option>
+        <optgroup label="anonymous 8:00-pm">
+          <option value="anonymous-100lvl">Anonymous 100l Level</option>
+          <option value="Anonymous-200lvl">Anonymous 200lvl 8:00-pm</option>
+        </optgroup>
+        <optgroup label="Scholars-Forum 8:00-pm">
+
+        <option value="scoholars-forum-100lvl">Scholars 100 level</option>
+        <option value="scoholars-forum-200lvl">Scholars 200 level</option>
+        </optgroup>
+        <option value="Counciling-forum">Council Group 9:00-pm</option>
       </select>
 
       <button

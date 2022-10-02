@@ -7,6 +7,7 @@ const ChatRoom = ({ room }) => {
   const navigate = useNavigate();
   const roomId = room;
   const inputEl = useRef(null);
+  const msgInput = document.querySelector("#msg-input");
   const { messages, sendMessage } = useChat(roomId);
   const [newMessage, setNewMessage] = React.useState("");
   const handleNewMessageChange = (event) => {
@@ -20,12 +21,13 @@ const ChatRoom = ({ room }) => {
   const handleSendMessage = () => {
     sendMessage(newMessage);
     setNewMessage("");
+    msgInput.focus();
   };
 
   return (
     <div className="chat-room-container">
       <header id="chat-header">
-      <h1 className="room-name">Room: {roomId}</h1>
+        <h1 className="room-name">Room: {roomId}</h1>
       </header>
       <div className="messages-container">
         <ol className="messages-list">
@@ -51,6 +53,7 @@ const ChatRoom = ({ room }) => {
       </div>
       <footer id="footer">
         <input
+          id="msg-input"
           value={newMessage}
           onChange={handleNewMessageChange}
           placeholder="Write message..."

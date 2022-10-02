@@ -38,9 +38,9 @@
 }
 #welcome-msg > span {
   border-radius: 10px;
-  background-color: #918f8f;
-  opacity: 0.5;
-  color: black;
+  background-color: #ffffff;
+  opacity: 0.6;
+  color: rgb(0, 0, 0);
 }
 
 #welcome-msg > sub {
@@ -66,7 +66,7 @@
 
 .message-item {
   width: 55%;
-  margin: 8px;
+  margin: 20px 8px;
   padding: 12px 8px;
   word-break: break-word;
   border-radius: 5px;

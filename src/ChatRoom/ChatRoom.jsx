@@ -24,7 +24,9 @@ const ChatRoom = ({ room }) => {
 
   return (
     <div className="chat-room-container">
+      <header id="chat-header">
       <h1 className="room-name">Room: {roomId}</h1>
+      </header>
       <div className="messages-container">
         <ol className="messages-list">
           <div id="welcome-msg">

@@ -56,7 +56,7 @@ const ChatRoom = ({ room }) => {
           id="msg-input"
           value={newMessage}
           onKeyDown={(e) => {
-            if(e.key === "enter") {
+            if(e.key === "Enter") {
               newMessage && handleSendMessage();
             }
           }}

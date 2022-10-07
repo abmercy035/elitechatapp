@@ -11,7 +11,7 @@ const ChatRoom = ({ room }) => {
   const { messages, sendMessage } = useChat(roomId);
   const [newMessage, setNewMessage] = React.useState("");
   const handleNewMessageChange = (event) => {
-    if (event.target.value) setNewMessage(event.target.value);
+     setNewMessage(event.target.value);
   };
   useEffect(() => {
     if (!roomId) navigate("/");
@@ -54,12 +54,12 @@ const ChatRoom = ({ room }) => {
       <footer id="footer">
         <input
           id="msg-input"
-          value={newMessage}
           onKeyDown={(e) => {
             if(e.key === "Enter") {
               newMessage && handleSendMessage();
             }
           }}
+          value={newMessage}
           onChange={handleNewMessageChange}
           placeholder="Write message..."
           className="new-message-input-field"

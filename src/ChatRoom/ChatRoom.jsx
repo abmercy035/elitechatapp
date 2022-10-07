@@ -11,8 +11,23 @@ const ChatRoom = ({ room }) => {
   const { messages, sendMessage } = useChat(roomId);
   const [newMessage, setNewMessage] = React.useState("");
   const handleNewMessageChange = (event) => {
-    if (event.target.value) setNewMessage(event.target.value);
+     setNewMessage(event.target.value);
   };
+
+  // window.onbeforeunload = (event) => {
+  //   const e = event || window.event;
+  //   // Cancel the event
+  //   console.log(e)
+  //   e.preventDefault();
+  //   if (e) {
+  //     // Legacy method for cross browser support
+  //     // e.returnValue = 'do yoi?';
+  //     navigate("/");
+  //   }
+  //   navigate("/");
+  //   // return ''; // Legacy method for cross browser support
+  // };
+
   useEffect(() => {
     if (!roomId) navigate("/");
     inputEl.current.scrollIntoView({ behavior: "smooth" });
@@ -54,18 +69,18 @@ const ChatRoom = ({ room }) => {
       <footer id="footer">
         <input
           id="msg-input"
-          value={newMessage}
           onKeyDown={(e) => {
             if(e.key === "Enter") {
               newMessage && handleSendMessage();
             }
           }}
+          value={newMessage}
           onChange={handleNewMessageChange}
           placeholder="Write message..."
           className="new-message-input-field"
         />
         <button
-          onClick={newMessage && handleSendMessage}
+          onClick={()=>{newMessage && handleSendMessage()}}
           className="send-message-button"
         >
           Send

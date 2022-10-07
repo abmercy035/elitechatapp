@@ -15,7 +15,7 @@ const Home = ({ sendRoom }) => {
     <div className="home-container">
 
 <header id="login-header">
-        <h3>Elite Chat App</h3>
+        <h3>Elite Chat App 1</h3>
       </header>
       <blockquote>
         Hello welcome to Elite multipurpose Chat App the App is mainly for students,

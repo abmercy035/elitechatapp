@@ -65,7 +65,7 @@ const ChatRoom = ({ room }) => {
           className="new-message-input-field"
         />
         <button
-          onClick={newMessage && handleSendMessage}
+          onClick={ () => newMessage && handleSendMessage}
           className="send-message-button"
         >
           Send

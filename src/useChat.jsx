@@ -10,19 +10,7 @@ const useChat = (roomId) => {
   const navigate = useNavigate()
   const [messages, setMessages] = useState([]);
   const socketRef = useRef();
-  window.onbeforeunload = (event) => {
-    const e = event || window.event;
-    // Cancel the event
-    console.log(e)
-    // e.preventDefault();
-    if (e) {
-      // Legacy method for cross browser support
-      // e.returnValue = '';
-      navigate("/");
-    }
-    navigate("/");
-    // return ''; // Legacy method for cross browser support
-  };
+ 
 
   useEffect(() => {
     socketRef.current = socketIOClient(SOCKET_SERVER_URL, {

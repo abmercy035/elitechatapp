@@ -18,7 +18,7 @@ const ChatRoom = ({ room }) => {
     const e = event || window.event;
     // Cancel the event
     console.log(e)
-    // e.preventDefault();
+    e.preventDefault();
     if (e) {
       // Legacy method for cross browser support
       // e.returnValue = 'do yoi?';

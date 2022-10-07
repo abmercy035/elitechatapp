@@ -3,13 +3,8 @@ import { useNavigate } from "react-router-dom";
 import socketIOClient from "socket.io-client";
 
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
-<<<<<<< HEAD
-// const SOCKET_SERVER_URL = "https://elitechatapi.herokuapp.com";
-const SOCKET_SERVER_URL = "http://localhost:5000";
-=======
 const SOCKET_SERVER_URL = "https://elitechatapi.herokuapp.com";
 // const SOCKET_SERVER_URL = "http://localhost:5000";
->>>>>>> bfdc84660cb7f08d9643392c881c56e0b82279b0
 
 const useChat = (roomId) => {
   const navigate = useNavigate()

@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ChatRoom.css";
 export default function ChatRoom({ socket }) {
   const navigate = useNavigate();
+  const inputEl = useRef(null);
+  const msgInput = document.querySelector("#msg-input");
   const MESSAGE_EVENT = "newMsg";
   const USER_JOINED_EVENT = "joinedUser";
   const NEW_MESSAGE_EVENT = "newChatMessage";
@@ -17,6 +19,10 @@ export default function ChatRoom({ socket }) {
   const Pressing = () => {
     socket.emit("keyPress", username);
   };
+
+  useEffect(() => {
+    inputEl.current.scrollIntoView({ behavior: "smooth" });
+  });
 
   useEffect(() => {
     socket.on("typing", (data) => {
@@ -87,20 +93,20 @@ export default function ChatRoom({ socket }) {
             return (
               <div key={i} className={message.status} id="all-msg">
                 <span id={"from"}> {message.username}</span>
-                <div className="message-item">
-                  {message.msg}
-                </div>
+                <div className="message-item">{message.msg}</div>
               </div>
             );
           })}
-          <small
-            style={{
-              opacity: "0.3",
-marginLeft: "12px",
-            }}
-          >
-            {typing ? `${typing}  is typing` : ""}
-          </small>
+          <div id="last-msg" ref={inputEl}>
+            <small
+              style={{
+                opacity: "0.3",
+                marginLeft: "12px",
+              }}
+            >
+              {typing ? `${typing}  is typing` : ""}
+            </small>
+          </div>
         </div>
       </section>
 

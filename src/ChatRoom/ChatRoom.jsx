@@ -4,7 +4,7 @@ import "./ChatRoom.css";
 export default function ChatRoom({ socket }) {
   const navigate = useNavigate();
   const inputEl = useRef(null);
-  const msgInput = document.querySelector("#msg-input");
+  const lastEl = useRef(null);
   const MESSAGE_EVENT = "newMsg";
   const USER_JOINED_EVENT = "joinedUser";
   const NEW_MESSAGE_EVENT = "newChatMessage";
@@ -21,7 +21,8 @@ export default function ChatRoom({ socket }) {
   };
 
   useEffect(() => {
-    inputEl.current.scrollIntoView({ behavior: "smooth" });
+    lastEl.current.scrollIntoView({ behavior: "smooth" });
+    inputEl.current.focus();
   });
 
   useEffect(() => {
@@ -72,9 +73,10 @@ export default function ChatRoom({ socket }) {
 
   const sendMSg = (e) => {
     e.preventDefault();
-    socket.emit(MESSAGE_EVENT, { ...myMsg });
+    if (myMsg.msg) socket.emit(MESSAGE_EVENT, { ...myMsg });
     setMyMsg({ ...myMsg, msg: "" });
   };
+
   return (
     <div id="chatroom-cont">
       <header id="chat-header">
@@ -97,7 +99,7 @@ export default function ChatRoom({ socket }) {
               </div>
             );
           })}
-          <div id="last-msg" ref={inputEl}>
+          <div id="last-msg" ref={lastEl}>
             <small
               style={{
                 opacity: "0.3",
@@ -113,9 +115,10 @@ export default function ChatRoom({ socket }) {
       <footer id="chat-foot">
         <form id="chat-form" onSubmit={sendMSg}>
           <input
+            id="msg-input"
             type="text"
             name="msg"
-            id="msg-input"
+            ref={inputEl}
             value={myMsg.msg}
             onKeyDown={() => {
               Pressing();

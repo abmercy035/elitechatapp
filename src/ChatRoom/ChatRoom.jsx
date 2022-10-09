@@ -88,7 +88,7 @@ export default function ChatRoom({ socket }) {
               <div key={i} className={message.status} id="all-msg">
                 <span id={"from"}> {message.username}</span>
                 <div className="message-item">
-                  {message.msg} : {i}
+                  {message.msg}
                 </div>
               </div>
             );

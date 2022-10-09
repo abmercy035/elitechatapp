@@ -1,9 +1,28 @@
-body {
-  margin: 0;
-}
+:root{
+  --wh : rgb(255, 255, 255);
+  --bl : rgb(36, 34, 34);
+  --bls : rgb(0, 0, 0);
+  --ash : rgb(185, 178, 178);
+  --rb : royalblue;
+  --rbs : rgb(13, 66, 223);
 
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  margin: 0;
+  background-color: rgb(255, 255, 255);
+}
+#root{
+  height: 100vh;
+}
 body, input, button, a, textarea {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+  
 }

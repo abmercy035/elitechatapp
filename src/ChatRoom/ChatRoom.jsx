@@ -1,78 +1,129 @@
-import React, { useRef } from "react";
-import "./ChatRoom.css";
-import useChat from "../useChat";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-const ChatRoom = ({ room }) => {
+import "./ChatRoom.css";
+export default function ChatRoom({ socket }) {
   const navigate = useNavigate();
-  const roomId = room;
-  const inputEl = useRef(null);
-  const msgInput = document.querySelector("#msg-input");
-  const { messages, sendMessage } = useChat(roomId);
-  const [newMessage, setNewMessage] = React.useState("");
-  const handleNewMessageChange = (event) => {
-     setNewMessage(event.target.value);
-  };
-  useEffect(() => {
-    if (!roomId) navigate("/");
-    inputEl.current.scrollIntoView({ behavior: "smooth" });
+  const MESSAGE_EVENT = "newMsg";
+  const USER_JOINED_EVENT = "joinedUser";
+  const NEW_MESSAGE_EVENT = "newChatMessage";
+  const room = socket.io.opts.query.room;
+  const username = localStorage.getItem("username");
+  const [messages, setMessages] = useState([]);
+  const [typing, setTyping] = useState();
+  const [myMsg, setMyMsg] = useState({
+    username,
   });
 
-  const handleSendMessage = () => {
-    sendMessage(newMessage);
-    setNewMessage("");
-    msgInput.focus();
+  const Pressing = () => {
+    socket.emit("keyPress", username);
   };
 
+  useEffect(() => {
+    socket.on("typing", (data) => {
+      if (data !== username) {
+        setTyping(data);
+      }
+      setTimeout(() => setTyping(""), 2000);
+    });
+
+    if (!socket.io.opts.query.room) navigate("/");
+    socket.on(NEW_MESSAGE_EVENT, (data) => {
+      const incoming = {
+        ...data,
+        status: data.id === socket.id ? "sent" : "received",
+      };
+      setMessages((prevMsg) => [...prevMsg, incoming]);
+    });
+    socket.on(USER_JOINED_EVENT, (data) => {
+      data.id !== socket.id ? showMe(data) : show(data);
+    });
+  }, []);
+
+  const showMe = (data) => {
+    const newU = document.querySelector("#messages-cont");
+    const div = document.createElement("div");
+    div.id = "welcome-msg";
+    setTimeout(() => {
+      document.querySelector("#welcome-msg").remove();
+    }, 2000);
+    div.innerHTML = `<span> <b>${data.username}</b> Joined the chat </span>`;
+    newU.appendChild(div);
+  };
+
+  const show = (data) => {
+    const newU = document.querySelector("#messages-cont");
+    const div = document.createElement("div");
+    div.id = "welcome-msg";
+    const bef = document.querySelector("#all-msg");
+    div.innerHTML = `
+      <span>
+      hello ${data.username} welcome to the group chat
+      </span>
+      <sub> -javascript- </sub>
+      `;
+    newU.insertBefore(div, bef);
+  };
+
+  const sendMSg = (e) => {
+    e.preventDefault();
+    socket.emit(MESSAGE_EVENT, { ...myMsg });
+    setMyMsg({ ...myMsg, msg: "" });
+  };
   return (
-    <div className="chat-room-container">
+    <div id="chatroom-cont">
       <header id="chat-header">
-        <h1 className="room-name">Room: {roomId}</h1>
+        <h2 id="room-name">{room} Room</h2>
       </header>
-      <div className="messages-container">
-        <ol className="messages-list">
+      <section id="chat-body">
+        <div id="messages-cont">
           <div id="welcome-msg">
             <span>
-              welcome to {roomId} feel free to say anything all identites are
-              kept anonymous.
+              Lorem, ipsum dolor Lorem ipsum dolor sit amet consectetur
+              adipisicing elit. Enim .
             </span>
-            <sub>-Javascript Enthusiast-</sub>
+            <sub>Javascript</sub>
           </div>
-          {messages.map((message, i) => (
-            <li
-              key={i}
-              className={`message-item ${
-                message.ownedByCurrentUser ? "my-message" : "received-message"
-              }`}
-            >
-              {message.body}
-            </li>
-          ))}
-        </ol>
-        <div id="last-msg" ref={inputEl}></div>
-      </div>
-      <footer id="footer">
-        <input
-          id="msg-input"
-          onKeyDown={(e) => {
-            if(e.key === "Enter") {
-              newMessage && handleSendMessage();
-            }
-          }}
-          value={newMessage}
-          onChange={handleNewMessageChange}
-          placeholder="Write message..."
-          className="new-message-input-field"
-        />
-        <button
-          onClick={()=>{newMessage && handleSendMessage()}}
-          className="send-message-button"
-        >
-          Send
-        </button>
+          {messages.map((message, i) => {
+            return (
+              <div key={i} className={message.status} id="all-msg">
+                <span id={"from"}> {message.username}</span>
+                <div className="message-item">
+                  {message.msg} : {i}
+                </div>
+              </div>
+            );
+          })}
+          <small
+            style={{
+              opacity: "0.3",
+marginLeft: "12px",
+            }}
+          >
+            {typing ? `${typing}  is typing` : ""}
+          </small>
+        </div>
+      </section>
+
+      <footer id="chat-foot">
+        <form id="chat-form" onSubmit={sendMSg}>
+          <input
+            type="text"
+            name="msg"
+            id="msg-input"
+            value={myMsg.msg}
+            onKeyDown={() => {
+              Pressing();
+            }}
+            onChange={(e) => {
+              setMyMsg({
+                ...myMsg,
+                msg: e.target.value,
+              });
+            }}
+          />
+          <input type="submit" name="send-btn" id="send-btn" value={"Send"} />
+        </form>
       </footer>
     </div>
   );
-};
-
-export default ChatRoom;
+}

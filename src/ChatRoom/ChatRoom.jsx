@@ -54,7 +54,10 @@ export default function ChatRoom({ socket }) {
     const newU = document.querySelector("#messages-cont");
     const div = document.createElement("div");
     div.id = "welcome-msg";
-    const bef = document.querySelector("#all-msg");
+    setTimeout(() => {
+      document.querySelector("#welcome-msg").remove();
+    }, 2000);
+     const bef = document.querySelector("#all-msg");
     div.innerHTML = `
       <span>
       hello ${data.username} welcome to the group chat

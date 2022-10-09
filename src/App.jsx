@@ -16,9 +16,6 @@ function App() {
     reconnectionDelayMax: 10000,
     query: { room },
   });
-
-  // const [details, setDetails] = useState({});
-  
   const setLoginDetails = ({username, room}) => {
     setRoom(room)
       socket.emit("newUserJoin", {
@@ -26,7 +23,6 @@ function App() {
       room,
     });
   };
-
   return (
     <Router>
       <Routes>

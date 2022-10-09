@@ -35,12 +35,14 @@ export default function Home({ sendLoginDetails }) {
             <input
               type="text"
               id="username-input"
+              placeholder="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
             <input
               type="text"
               id="room-input"
+              placeholder="room"
               value={room}
               onChange={(e) => setRoom(e.target.value)}
             />

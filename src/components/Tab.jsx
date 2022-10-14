@@ -1,8 +1,11 @@
-import React from 'react'
+import React from "react";
 
-export default function Tab({id, cls, txt}) {
-  return (
-    <div id={id}> {txt}</div>
+export default function Tab({ id, cls, txt }) {
 
-  )
+    return (
+      <div className={cls} id={id}>
+        {txt}
+      </div>
+    );
+  // }
 }

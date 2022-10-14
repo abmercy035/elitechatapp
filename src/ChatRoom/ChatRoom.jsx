@@ -47,7 +47,6 @@ export default function ChatRoom({ socket }) {
 
     // toggling Tabs
     Array.from(navs).forEach((nav) => {
-      console.log(nav);
       nav.addEventListener("click", (e) => {
         if (e.target.id === "cboard") {
           Array.from([chat]).forEach((elem) => {
@@ -273,9 +272,7 @@ export default function ChatRoom({ socket }) {
       <Header />
 
       <div id="chatroom-cont">
-        <header id="chat-header">
-          <h2 id="room-name">{room} Room</h2>
-        </header>
+     
         <section id="chat-body">
           <div id="messages-cont" className="containers">
             {messages.map((message, i) => {

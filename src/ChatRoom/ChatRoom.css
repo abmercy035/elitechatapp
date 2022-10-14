@@ -11,18 +11,6 @@
   display: none;
 }
 
-#chat-header {
-  height: 5vh;
-  background-color: var(--bl);
-  margin: 0 auto 0px;
-  color: var(--rb);
-  width: 100vw;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  text-shadow: 0px 1px 1px var(--ash);
-}
 
 #chat-body {
   height: 80vh;
@@ -70,7 +58,7 @@
   width: 100vw;
   overflow: auto;
   background-color: var(--bl);
-  height: 80vh;
+  height: 85vh;
   padding-top: 60px;
 }
 

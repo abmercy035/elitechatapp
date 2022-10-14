@@ -19,10 +19,10 @@ export default function Home({ sendLoginDetails }) {
 
   return (
     <div id="login-cont">
-      <header id="login-header">
-        {/* <div id="login-logo">?</div> */}
+      {/* <header id="login-header">
         <h2 id="comp-name"> Chat App </h2>
-      </header>
+      </header> */}
+      <div id="login-logo"></div>
       <div id="form-cont">
         <div id="login-msg">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos
@@ -39,7 +39,7 @@ export default function Home({ sendLoginDetails }) {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
-            <select
+            {/* <select
               className="username-input"
               type="text"
               placeholder="Room"
@@ -63,7 +63,7 @@ export default function Home({ sendLoginDetails }) {
               </optgroup>
               <option value="Counciling-forum" >Council Group 9:00-pm</option>
               <option value="enter room"> enter a different room </option>
-            </select>
+            </select> */}
 
             <input
               type="text"
@@ -76,9 +76,8 @@ export default function Home({ sendLoginDetails }) {
           </form>
         </div>
       </div>
-
       <footer id="login-foot">
-     <h1>Mega-X</h1>
+     <span><b>Mega-X</b> Improving Your World</span>
       </footer>
     </div>
   );

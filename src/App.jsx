@@ -10,12 +10,12 @@ import Home from "./Home/Home";
 import ChatRoom from "./ChatRoom/ChatRoom";
 import socketIOClient from "socket.io-client";
 function App() {
-  // const SOCKET_SERVER_URL = "https://elitechatapi.herokuapp.com";
-  const SOCKET_SERVER_URL = "http://localhost:5000";
+  const SOCKET_SERVER_URL = "https://elitechatapi.herokuapp.com";
+  // const SOCKET_SERVER_URL = "http://localhost:5000";
 
   const [room, setRoom] = useState("");
   const socket = socketIOClient(SOCKET_SERVER_URL, {
-    reconnectionDelayMax: 10000,
+    reconnectionDelayMax: 1000,
     query: { room },
   });
   const setLoginDetails = ({ username, room }) => {

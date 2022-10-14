@@ -6,7 +6,7 @@ import MessagesBox from "../components/MessagesBox";
 import Typing from "../components/Typing";
 import Footer from "../components/Footer";
 import Button from "../components/Button";
-import Tab from "../components/Tab";
+import Header from "../components/Header";
 export default function ChatRoom({ socket }) {
   const navigate = useNavigate();
   const inputEl = useRef(null);
@@ -74,7 +74,6 @@ export default function ChatRoom({ socket }) {
 
     // window.addEventListener("load", () => {
     var canvas = document.getElementById("canvas-board");
-    var canvasPressed = false;
     var ctx = canvas.getContext("2d");
     ctx.strokeStyle = lineColor;
     ctx.lineWidth = lineWidth;
@@ -271,12 +270,7 @@ export default function ChatRoom({ socket }) {
 
   return (
     <>
-      <header id="app-header">
-        <Tab id="Profile" txt="Profile" />
-         <Tab id="chat" txt="chat" />
-        <Tab id="cboard" txt="c-board" />
-        <Tab id="online" txt="online" />
-      </header>
+      <Header />
 
       <div id="chatroom-cont">
         <header id="chat-header">
@@ -284,13 +278,6 @@ export default function ChatRoom({ socket }) {
         </header>
         <section id="chat-body">
           <div id="messages-cont" className="containers">
-            <div id="welcome-msg">
-              <span>
-                Lorem, ipsum dolor Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Enim .
-              </span>
-              <sub>Javascript</sub>
-            </div>
             {messages.map((message, i) => {
               return <MessagesBox message={message} index={i} />;
             })}
@@ -317,6 +304,7 @@ export default function ChatRoom({ socket }) {
                 txt="erase"
                 id="eraser"
                 cls="tools"
+                value={strokeSize}
                 func={() => changeColor("white")}
                 onclick
               />

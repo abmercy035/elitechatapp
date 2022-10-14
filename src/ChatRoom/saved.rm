@@ -1,0 +1,89 @@
+
+    // canvas.addEventListener("touchdown", function (evt) {
+    //   var touch = evt.touches[0];
+
+    //   socket.emit("pointerdown", {
+    //     x: evt.touch.clientX,
+    //     y: evt.touch.clientY,
+    //   });
+    //   canvasPressed = true;
+    //   ctx.beginPath();
+    //   ctx.moveTo(evt.touch.clientX, evt.touch.clientY);
+    // });
+    // canvas.addEventListener("touchup", function (evt) {
+    //   socket.emit("pointerup", "false");
+    //   canvasPressed = false;
+    // });
+    // canvas.addEventListener("touchmove", function (evt) {
+    //   var touch = evt.touches[0];
+
+    //   if (canvasPressed) {
+    //     socket.emit("pointermove", {
+    //       y: evt.touch.clientY,
+    //       x: evt.touch.clientX,
+    //     });
+    //     ctx.lineTo(evt.touch.clientX, evt.touch.clientY);
+    //     ctx.moveTo(evt.touch.clientX, evt.touch.clientY);
+    //     ctx.stroke();
+    //   }
+    // });
+    // // });
+
+    // if (!canvasPressed) {
+    //   socket.on("penStart", (data) => {
+    //     ctx.beginPath();
+    //     ctx.moveTo(data.x, data.y);
+    //   });
+    //   socket.on("penStop", (data) => {
+    //     canvasPressed = data;
+    //   });
+    //   socket.on("penMove", (data) => {
+    //     ctx.lineTo(data.x, data.y);
+    //     ctx.moveTo(data.x, data.y);
+    //     ctx.stroke();
+    //   });
+    // }
+
+
+
+
+
+          {/* <div id="b" className="containers hide">
+          <canvas id="can" width="400" height="400"></canvas>
+          <div id="tools">
+            <input type="color" id="colors" />
+            <input type="number" id="size" placeholder="size" />
+            <input type="button" id="clear-btn" value="clear" />
+          </div>
+        </div>
+        <div id="online" className="containers hide">
+          <canvas id="can" width="400" height="400"></canvas>
+          <div id="tools">
+            <input type="color" id="colors" />
+            <input type="number" id="size" placeholder="size" />
+            <input type="button" id="clear-btn" value="clear" />
+          </div>
+        </div> */}
+
+
+        
+          {/* <canvas id="can" width="500" height="500"></canvas>
+          <div id="tools">
+            <input
+              type="color"
+              id="colors"
+              onChange={(e) => setLineColor(e.target.value)}
+            />
+            <input
+              type="number"
+              id="size"
+              placeholder="size"
+              onChange={(e) => setLineWidth(e.target.value)}
+            />
+            <input
+              type="button"
+              id="clear-btn"
+              value="clear"
+              onClick={clearCanva}
+            />
+          </div> */}

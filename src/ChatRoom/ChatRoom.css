@@ -1,5 +1,5 @@
 #chatroom-cont {
-  height: 100%;
+  height: calc(100% - 5vh);
   width: 100vw;
   margin: auto;
   background-color: var(--bls);
@@ -12,10 +12,9 @@
 }
 
 #chat-header {
-  height: 10vh;
+  height: 5vh;
   background-color: var(--bl);
   margin: 0 auto 0px;
-  padding: 10px 0;
   color: var(--rb);
   width: 100vw;
   text-align: center;
@@ -67,7 +66,7 @@
   color: white;
 }
 
-#messages-cont {
+.containers {
   width: 100vw;
   overflow: auto;
   background-color: var(--bl);
@@ -133,7 +132,7 @@
 
 #chat-footer {
   display: flex;
-  height: 20vw;
+  height: 20vh;
   max-height: 10%;
   justify-content: space-around;
   max-width: 600px;
@@ -182,4 +181,8 @@
   text-align: center;
   color: var(--wh);
   border-radius: 0px 5px 5px 0px;
+}
+
+.hide{
+  display: none !important;
 }

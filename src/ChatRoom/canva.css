@@ -1,0 +1,111 @@
+h1 {
+  background: #7f7fd5;
+  background: -webkit-linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
+  background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* We'll also make the container 100% height, set the display to flex. */
+.container {
+  height: 100%;
+  display: flex;
+}
+/* For the toolbar we will use flexbox with column direction. The width of the toolbar will have a fixed width of 70px. We'll add some spacing with 5px of padding and set a dark background for it. */
+
+/* For the toolbar elements I apply some basic styling. Feel free to copy these styles 👇 */
+
+#canvas-cont {
+  /* height: 80%; */
+  position: fixed;
+  bottom: 10vh;
+  right: 0;
+  background-color: white;
+}
+
+/*  */
+
+
+#toolbox {
+  position: absolute;
+  background: rgb(210, 210, 210);
+  padding: 5px;
+  margin: 5px;
+  border-radius: 10px;
+  bottom: 0;
+}
+.colorButton {
+  transition: 0.1s linear;
+  position: relative;
+  float: left;
+  margin: 5px;
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+  z-index: 3;
+}
+.tools {
+  transition: 0.1s linear;
+  position: relative;
+  float: left;
+  margin: 5px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background: white;
+  cursor: default;
+}
+#eraser:hover {
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+}
+#colorSelector:hover {
+  transition: 0.1s linear;
+  width: 45px;
+  height: 45px;
+  margin: 2.5px;
+}
+
+#lineSize{
+  transition: 0.1s linear;
+  position: relative;
+  padding: 2px;
+  border-radius: 20%;
+  border: 1px black solid;
+  width: 40px;
+  height: 40px;
+  background: white;
+}
+
+#colorSelector {
+  width: 40px;
+  height: 40px;
+  border-radius: 20%;
+  background: white;
+}
+
+#eraser {
+  width: 40px;
+  height: 40px;
+  background: white;
+  font-size: 13px;
+  font-weight: 700;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#clearAll {
+  border-radius: 10%;
+  width: 60px;
+  height: 40px;
+  background: black;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

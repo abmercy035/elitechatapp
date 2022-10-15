@@ -162,7 +162,7 @@ export default function ChatRoom({ socket }) {
       }
       setTimeout(() => setTyping(""), 2000);
     });
-    // if (!socket.io.opts.query.room) navigate("/");
+    if (!socket.io.opts.query.room) navigate("/");
     socket.on(NEW_MESSAGE_EVENT, (data) => {
       lastEl.current.scrollIntoView({ behavior: "smooth" });
 

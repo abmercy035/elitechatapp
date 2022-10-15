@@ -8,22 +8,7 @@
     "showImg"
     "form-cont"
     "foot";
-  /* place-content: center; */
-  /* grid-gap: 5%; */
 }
-/* #login-header {
-  height: 60px;
-  margin: 0 auto 0px;
-  color: var(--rb);
-  width: 100%;
-  text-align: center;
-  font-size: x-large;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 20px;
-  text-shadow: 0px 1px 1px var(--ash);
-} */
 
 #login-logo {
   grid-area: "showImg";
@@ -59,6 +44,7 @@
   height: fit-content;
   text-align: justify;
   word-break: break-all;
+  cursor: default;
 }
 
 #login-form-cont {
@@ -75,7 +61,7 @@
 #login-form input,
 select {
   width: 100%;
-  height: 40px;
+  height: 5vh;
   border-radius: 4px;
   margin: 5px auto;
   font-weight: 700;
@@ -86,13 +72,17 @@ select {
 .username-input {
   padding: 0 15px;
 }
+#room-input::placeholder,
+.username-input::placeholder {
+  padding: 0 5px;
+  color: var(--bls);
+}
 #submit-input {
   background-color: var(--rbs);
   box-shadow: 0px 0px 2px var(--rb), inset 0px 0px 5px var(--ash);
   text-align: center;
   color: var(--wh);
   font-variant: small-caps;
-
 }
 
 #login-foot {

@@ -7,6 +7,9 @@ import Typing from "../components/Typing";
 import Footer from "../components/Footer";
 import Button from "../components/Button";
 import Header from "../components/Header";
+import colorPalette from "../img/color-palette.svg";
+import eraser from "../img/eraser.svg";
+import reset from "../img/reset.svg";
 export default function ChatRoom({ socket }) {
   const navigate = useNavigate();
   const inputEl = useRef(null);
@@ -20,31 +23,24 @@ export default function ChatRoom({ socket }) {
   const [typing, setTyping] = useState();
   const [lineWidth, setLineWidth] = useState();
   const [lineColor, setLineColor] = useState();
-
   const [myMsg, setMyMsg] = useState({
     username,
   });
 
-  let color = "black";
-  let strokeSize = 1;
+  // let color = "black";
+  // let strokeSize = 1;
 
-  function changeColor(data) {
-    color = data;
-  }
-  function changeSize(width) {
-    strokeSize = width;
-  }
+  // function changeColor(data) {
+  //   color = data;
+  // }
+  // function changeSize(width) {
+  //   strokeSize = width;
+  // }
 
   useEffect(() => {
     const navs = document.querySelectorAll("#app-header div");
     const chat = document.querySelector("#messages-cont");
     const cboard = document.querySelector("#canvas-cont");
-
-    //
-    //
-    //
-    //
-
     // toggling Tabs
     Array.from(navs).forEach((nav) => {
       nav.addEventListener("click", (e) => {
@@ -65,51 +61,30 @@ export default function ChatRoom({ socket }) {
         }
       });
     });
-
-    //
-    //
-    //
-    //
-
-    // window.addEventListener("load", () => {
+  });
+  var color = "black";
+  var penSize = 2;
+  useEffect(() => {
     var canvas = document.getElementById("canvas-board");
     var ctx = canvas.getContext("2d");
     ctx.strokeStyle = lineColor;
     ctx.lineWidth = lineWidth;
-
-    //
-    //
-    //
-    //
-
-    //resizing
+    // resizing
+    window.addEventListener("resize", () => {
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+    });
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
-
-    //
-    //
-    //
-    //
-
-    //variables
+    // variables
     let painting = false;
 
-    //
-    //
-    //
-    //
-
-    //functions
+    // functions
     function startPosition(e) {
       painting = true;
       socket.emit("pointerdown", { clientX: e.clientX, clientY: e.clientY });
       draw(e);
     }
-
-    //
-    //
-    //
-    //
 
     function endPosition() {
       painting = false;
@@ -117,18 +92,13 @@ export default function ChatRoom({ socket }) {
       socket.emit("pointerup", false);
     }
 
-    //
-    //
-    //
-    //
-
     function draw(e) {
       if (!painting) {
         return;
       }
       e.preventDefault();
       e.stopPropagation();
-      ctx.lineWidth = strokeSize;
+      ctx.lineWidth = penSize;
       ctx.lineCap = "round";
       ctx.lineTo(e.offsetX, e.offsetY);
       ctx.stroke();
@@ -138,12 +108,7 @@ export default function ChatRoom({ socket }) {
       socket.emit("pointermove", { offsetX: e.offsetX, offsetY: e.offsetY });
     }
 
-    //
-    //
-    //
-    //
-
-    //event listeners
+    //  event listeners
     canvas.addEventListener("mousedown", startPosition);
     canvas.addEventListener("touchstart", startPosition);
     canvas.addEventListener("mouseup", endPosition);
@@ -151,11 +116,6 @@ export default function ChatRoom({ socket }) {
     canvas.addEventListener("mousemove", draw);
     canvas.addEventListener(
       "touchmove",
-
-      //
-      //
-      //
-      //
 
       function (e) {
         var touch = e.touches[0];
@@ -168,17 +128,11 @@ export default function ChatRoom({ socket }) {
       },
       false
     );
-
-    //
-    //
-    //
-    //
-
     socket.on("penStart", (e) => {
       if (!painting) {
         return;
       }
-      ctx.lineWidth = strokeSize;
+      ctx.lineWidth = penSize;
       ctx.lineCap = "round";
       ctx.lineTo(e.offsetX, e.offsetY);
       ctx.stroke();
@@ -191,7 +145,7 @@ export default function ChatRoom({ socket }) {
       ctx.beginPath();
     });
     socket.on("penMove", (e) => {
-      ctx.lineWidth = strokeSize;
+      ctx.lineWidth = penSize;
       ctx.lineCap = "round";
       ctx.lineTo(e.offsetX, e.offsetY);
       ctx.stroke();
@@ -201,20 +155,6 @@ export default function ChatRoom({ socket }) {
     });
   }, []);
 
-  const clearCanva = () => {
-    var canvas = document.getElementById("canvas-board");
-    var ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  };
-
-  const Pressing = () => {
-    socket.emit("keyPress", username);
-  };
-
-  useEffect(() => {
-    lastEl.current.scrollIntoView({ behavior: "smooth" });
-  }, []);
-
   useEffect(() => {
     socket.on("typing", (data) => {
       if (data !== username) {
@@ -222,9 +162,10 @@ export default function ChatRoom({ socket }) {
       }
       setTimeout(() => setTyping(""), 2000);
     });
-
     // if (!socket.io.opts.query.room) navigate("/");
     socket.on(NEW_MESSAGE_EVENT, (data) => {
+      lastEl.current.scrollIntoView({ behavior: "smooth" });
+
       const incoming = {
         ...data,
         status: data.id === socket.id ? "sent" : "received",
@@ -236,6 +177,14 @@ export default function ChatRoom({ socket }) {
     });
   }, []);
 
+  const clearCanva = () => {
+    var canvas = document.getElementById("canvas-board");
+    var ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  };
+  const Pressing = () => {
+    socket.emit("keyPress", username);
+  };
   const showMe = (data) => {
     const newU = document.querySelector("#messages-cont");
     const div = document.createElement("div");
@@ -262,52 +211,30 @@ export default function ChatRoom({ socket }) {
   };
 
   const sendMSg = (e) => {
+    lastEl.current.scrollIntoView({ behavior: "smooth" });
     e.preventDefault();
     if (myMsg.msg) socket.emit(MESSAGE_EVENT, { ...myMsg });
     setMyMsg({ ...myMsg, msg: "" });
   };
-
   return (
     <>
       <Header />
 
       <div id="chatroom-cont">
-     
         <section id="chat-body">
           <div id="messages-cont" className="containers">
             {messages.map((message, i) => {
-              return <MessagesBox message={message} index={i} />;
+              return <MessagesBox message={message} key={i} />;
             })}
             <div id="last-msg" ref={lastEl}>
               <Typing typing={typing} />
             </div>
           </div>
-          <div id="canvas-cont" className="containers hide">
+          <div id="canvas-cont" className="hide">
             <div id="toolbox">
               <Button
-                id="lineSize"
-                cls="tools"
-                type="number"
-                func={(e) => changeSize(e.target.value)}
-              />
-              <Button
-                id="colorSelector"
-                cls="tools"
-                txt="erase"
-                type="color"
-                func={(e) => changeColor(e.target.value)}
-              />
-              <Button
-                txt="erase"
-                id="eraser"
-                cls="tools"
-                value={strokeSize}
-                func={() => changeColor("white")}
-                onclick
-              />
-              <Button
-                txt="Clear All"
-                id="eraser"
+                src={reset}
+                id="clearAll"
                 cls="tools"
                 func={() => clearCanva()}
                 onclick

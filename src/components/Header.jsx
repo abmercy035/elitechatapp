@@ -1,6 +1,5 @@
 import React from "react";
 import Tab from "./Tab";
-import chatIcon  from "../img/chat-icon.svg"
 import "./header.css"
 
 export default function Header() {

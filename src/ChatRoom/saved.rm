@@ -87,3 +87,42 @@
               onClick={clearCanva}
             />
           </div> */}
+
+
+
+
+             {/*
+              <Button
+                id="lineSize"
+                cls="tools"
+                type="number"
+                value={lineWidth}
+                func={(e) => setLineWidth(e.target.value)}
+              /> 
+               <Button
+                id="colorInput"
+                cls="tools"
+                txt="erase"
+                type="color"
+                value={lineColor}
+                func={(e) => setLineColor(e.target.value)}
+              />              
+              <Button
+                src={colorPalette}
+                func={() => document.querySelector("#colorInput").click()}
+                className={"tools"}
+                cls="tools"
+                id={"colorSelector"}
+                onclick
+              />
+              <Button
+                src={eraser}
+                id="eraser"
+                cls="tools"
+                func={() => {
+                  setLineColor("white");
+                  console.log(lineColor);
+                }}
+                onclick
+              /> 
+              */}

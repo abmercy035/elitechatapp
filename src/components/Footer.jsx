@@ -20,7 +20,7 @@ export default function Footer({sendMSg, Pressing, setMyMsg, myMsg, inputEl}) {
             });
           }}
         />
-        <input type="submit" name="send-btn" id="send-btn" value={"Send"} />
+        <input type="submit" name="send-btn" id="send-btn" value=""/>
       </form>
     </footer>
   );

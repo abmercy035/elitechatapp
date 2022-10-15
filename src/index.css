@@ -1,21 +1,22 @@
 :root{
-  --wh : rgb(255, 255, 255);
-  --bl : rgb(36, 34, 34);
-  --bls : rgb(0, 0, 0);
-  --ash : rgb(185, 178, 178);
-  --rb : #4169e1;
-  --rbs : rgb(13, 66, 223);
-
+  --wh : #ffffff;
+  /* --bl : #242222; */
+  --bls : #14141c;
+  --bl : #2c2b3f;
+  --ash : #645c64;
+  --rb : #3b79f5;
+  --rbs : #0d3bc5;
 }
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  outline: none;
 }
 body {
   height: 100vh;
   margin: 0;
-  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(255, 255, 255); */
 }
 #root{
   height: 100vh;

@@ -51,10 +51,10 @@
   color: white;
 }
 .containers {
-  background-color: #242222;
+  background-color: var(--bls);
   background-image: url("../img/appbg.svg");
   background-size: cover;
-  background-position:center;
+  background-position: center;
   background-repeat: no-repeat;
   width: 100vw;
   overflow: auto;
@@ -98,7 +98,7 @@
 }
 .sent .message-item {
   background-color: var(--wh);
-  
+
   font-weight: 600;
   color: rgb(0, 0, 0);
   box-shadow: 0px 0px 2px var(--bls), inset 0px 0px 6px 1px var(--bl);
@@ -160,7 +160,6 @@
 }
 
 #send-btn {
-
   background-color: #000000;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='%23FFFFFF'%3E%3Cpath d='M2 4v6.5L14 12 2 13.5V20l20-8z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
   background-size: 30px 30px;

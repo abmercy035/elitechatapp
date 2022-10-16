@@ -99,8 +99,8 @@ export default function ChatRoom({ socket }) {
       if (!painting) {
         return;
       }
-      // e.preventDefault();
-      // e.stopPropagation();
+      e.preventDefault();
+      e.stopPropagation();
       ctx.lineWidth = lineWidth.value;
       ctx.lineCap = "round";
       ctx.lineTo(e.offsetX, e.offsetY);
@@ -147,8 +147,8 @@ export default function ChatRoom({ socket }) {
       ctx.beginPath();
       ctx.moveTo(e.offsetX, e.offsetY);
     });
-    socket.on("penStop", (data) => {
-      painting = data;
+    socket.on("penStop", () => {
+      painting = false;
       ctx.beginPath();
     });
     socket.on("penMove", (e) => {
@@ -229,7 +229,6 @@ export default function ChatRoom({ socket }) {
   return (
     <>
       <Header />
-
       <div id="chatroom-cont">
         <section id="chat-body">
           <div id="messages-cont" className="containers">
@@ -243,7 +242,6 @@ export default function ChatRoom({ socket }) {
           <div id="canvas-cont" className="hide">
             <div id="toolbox">
               <Button id="lineSize" cls="tools" type="number" value={3} />
-
               <input
                 id="colorInput"
                 cls="tools"

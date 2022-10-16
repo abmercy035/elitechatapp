@@ -8,6 +8,7 @@
   background-color: var(--wh);
   height: 85vh;
   padding-top: 60px;
+  border: 1px black solid;
 }
 #toolbox {
   position: absolute;

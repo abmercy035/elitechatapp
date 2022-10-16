@@ -1,80 +1,86 @@
-h1 {
-  background: #7F7FD5;
-  background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
-  background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-/* We'll also make the container 100% height, set the display to flex. */
-.container {
-  height: 100%;
-  display: flex;
-}
-/* For the toolbar we will use flexbox with column direction. The width of the toolbar will have a fixed width of 70px. We'll add some spacing with 5px of padding and set a dark background for it. */
 
-/* For the toolbar elements I apply some basic styling. Feel free to copy these styles 👇 */
-#toolbar {
-  display: flex;
-  flex-direction: column;
-  padding: 5px;
-  width: 70px;
-  background-color: #202020;
-}
-
-#toolbar * {
-  margin-bottom: 6px;
-}
-
-#toolbar label {
-  font-size: 12px;
-}
-
-#toolbar input {
-  width: 100%;
-}
-
-#toolbar button {
-  background-color: #1565c0;
-  border: none;
-  border-radius: 4px;
-  color:white;
-  padding: 2px;
-}
-
-#drawing-board{
-  width: 400px !important;
-  height: 400px !important;
-  border: red 2px solid !important;
-}
-
-#can {
-  border: 1px solid red;
-  
-}
-
-
-#canvas-cont{
-  height: 450px;
+#canvas-cont {
   position: fixed;
   bottom: 10vh;
-  right: 0;
-  background-color : white;
+  /* right: 0; */
+  width: 100vw;
+  overflow: auto;
+  background-color: var(--wh);
+  height: 85vh;
+  padding-top: 60px;
+  border: 1px black solid;
 }
-#tools{
-  width: 45%;
-  margin-left: auto;
+#toolbox {
+  position: absolute;
+  background: rgb(210, 210, 210);
+  padding: 5px;
+  margin: 5px;
+  border-radius: 10px;
+  bottom: 0;
+}
+.colorButton {
+  transition: 0.1s linear;
+  position: relative;
+  float: left;
+  margin: 5px;
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+  z-index: 3;
+}
+.tools {
+  transition: 0.1s linear;
+  position: relative;
+  float: left;
+  border-radius: 50%;
+  height: 40px;
+  background: white;
+  cursor: default;
+  margin: 5px;
+  height: 40px;
+  width: 40px;
+}
+.tools:hover {
+  width: 30px;
+  height: 30px;
+  transform: scale(1.4);
+  font-size: 10px;
+  margin: 8px;
+}
+#lineSize{
+  padding: 2px;
+  border-radius: 20%;
+  border: 1px black solid;
+  background: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+}
+#colorInput {
+  display: none;
+}
+
+#colorSelector {
+  background: rgb(0, 0, 0);
+}
+#eraser {
+  background: white;
+  font-size: 13px;
+  font-weight: 700;
+  color: black;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
-  gap: 2px;
+}
+#clearAll {
+  background: rgb(255, 255, 255);
+  font-size: 12px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#tools > input {
-  width: 50px;
-  height: 30px;
-outline: none;
-border: 0;
-padding: 2px;
+#canvas-board{
+  position: absolute;
+  z-index: -1;
+  top: 0;
 }

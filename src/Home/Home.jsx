@@ -19,10 +19,10 @@ export default function Home({ sendLoginDetails }) {
 
   return (
     <div id="login-cont">
-      <header id="login-header">
-        <div id="login-logo">?</div>
+      {/* <header id="login-header">
         <h2 id="comp-name"> Chat App </h2>
-      </header>
+      </header> */}
+      <div id="login-logo"></div>
       <div id="form-cont">
         <div id="login-msg">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos
@@ -76,14 +76,8 @@ export default function Home({ sendLoginDetails }) {
           </form>
         </div>
       </div>
-
       <footer id="login-foot">
-        <h4>Sponors</h4>
-        <nav>
-          <ul>
-            <li> 200 level</li>
-          </ul>
-        </nav>
+     <span><b>Mega-X</b> Improving Your World</span>
       </footer>
     </div>
   );

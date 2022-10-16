@@ -1,36 +1,20 @@
 #chatroom-cont {
-  height: 100%;
+  height: calc(100% - 5vh);
   width: 100vw;
   margin: auto;
-  background-color: var(--bls);
+  /* background-color: var(--bls); */
   color: var(--wh);
   display: grid;
 }
-
 *::-webkit-scrollbar {
   display: none;
 }
-
-#chat-header {
-  height: 10vh;
-  background-color: var(--bl);
-  margin: 0 auto 0px;
-  padding: 10px 0;
-  color: var(--rb);
-  width: 100vw;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  text-shadow: 0px 1px 1px var(--ash);
-}
-
 #chat-body {
-  height: 80vh;
+  height: 85vh;
   display: flex;
   flex-direction: column;
   gap: 30px;
-  background-color: var(--bls);
+  /* background-color: var(--rb); */
   box-shadow: inset 0px 0px 59px var(--bl);
   align-items: center;
   justify-content: space-between;
@@ -66,15 +50,18 @@
 #welcome-msg > sub {
   color: white;
 }
-
-#messages-cont {
+.containers {
+  background-color: var(--bls);
+  background-image: url("../img/appbg.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   width: 100vw;
   overflow: auto;
   background-color: var(--bl);
-  height: 80vh;
+  height: 85vh;
   padding-top: 60px;
 }
-
 #last-msg {
   height: 100px;
 }
@@ -83,22 +70,19 @@
   width: 70%;
   max-width: 600px;
   margin-top: 10px;
-  font-weight: 700;
+  font-weight: 900;
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
-
 .sent {
   margin-left: auto;
   margin-right: 10px;
 }
-
 .received {
   word-spacing: 1px;
   margin-left: 10px;
 }
-
 .message-item {
   height: fit-content;
   text-align: justify;
@@ -107,33 +91,29 @@
   padding: 12px 8px;
   border-radius: 5px;
 }
-
 .sent span {
-  color: var(--ash);
+  color: var(--rb);
   align-self: flex-end;
-  text-shadow: 0px 1px 1px var(--rbs);
 }
 .sent .message-item {
-  background-color: rgb(0, 132, 255);
-  font-weight: 700;
-  color: black;
-  box-shadow: 0px 0px 2px var(--bls), inset 0px 0px 1px 2px var(--bl);
+  background-color: var(--wh);
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+  box-shadow: 0px 0px 2px var(--rb), inset 0px 0px 1px 3px var(--bl);
 }
-
 .received span {
-  color: var(--rb);
-  text-shadow: 0px 1px 1px var(--bls);
+  color: var(--wh);
 }
 .received .message-item {
-  background-color: var(--bls);
+  background-color: var(--rb);
+  color: var(--wh);
   font-weight: 600;
   word-spacing: 1px;
-  box-shadow: 0px 0px 2px var(--rbs), inset 0px 0px 1px 2px var(--rbs);
+  box-shadow: 0px 0px 2px var(--wh), inset 0px 0px 1px 3px var(--bls);
 }
-
 #chat-footer {
   display: flex;
-  height: 20vw;
+  height: 20vh;
   max-height: 10%;
   justify-content: space-around;
   max-width: 600px;
@@ -144,6 +124,7 @@
 }
 
 #chat-foot {
+  background-color: var(--bls);
   left: 0;
   bottom: 0;
   width: 100vw;
@@ -153,9 +134,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: var(--wh);
   text-align: center;
-  background-color: var(--bl);
 }
 #chat-form {
   height: 80%;
@@ -176,10 +155,20 @@
   padding: 0 15px;
   border-radius: 5px 0px 0px 5px;
 }
+
 #send-btn {
+  background-color: #000000;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='%23FFFFFF'%3E%3Cpath d='M2 4v6.5L14 12 2 13.5V20l20-8z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+  background-size: 30px 30px;
+  background-position: center center;
+  background-repeat: no-repeat;
   background-color: var(--rbs);
-  box-shadow: 0px 0px 2px var(--rb), inset 0px 0px 5px var(--ash);
+  box-shadow: 0px 0px 2px var(--rb), inset 0px 0px 5px var(--bls);
   text-align: center;
   color: var(--wh);
   border-radius: 0px 5px 5px 0px;
+}
+
+.hide {
+  display: none !important;
 }

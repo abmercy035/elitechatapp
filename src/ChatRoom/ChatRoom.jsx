@@ -2,6 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ChatRoom.css";
 import "./canva.css";
+import MessagesBox from "../components/MessagesBox";
+import Typing from "../components/Typing";
+import Footer from "../components/Footer";
+import Button from "../components/Button";
+import Header from "../components/Header";
+import colorPalette from "../img/color-palette.svg";
+import eraser from "../img/eraser.svg";
+import reset from "../img/reset.svg";
 export default function ChatRoom({ socket }) {
   const navigate = useNavigate();
   const inputEl = useRef(null);
@@ -17,49 +25,144 @@ export default function ChatRoom({ socket }) {
     username,
   });
 
-
-  
-  window.addEventListener("load", () => {
-    var canvas = document.getElementById("can");
-    var canvasPressed = false;
-    var ctx = canvas.getContext("2d");
-    ctx.strokeStyle ="red"
-    ctx.lineWidth ="5"
-
-
-
-    canvas.addEventListener("pointerdown", function (evt) {
-      // console.log("event pointerdown", evt);
-      canvasPressed = true;
-      ctx.beginPath();
-      ctx.moveTo(evt.offsetX, evt.offsetY);
-
-      // console.log(evt.offsetX, evt.offsetY)
-    });
-    canvas.addEventListener("pointerup", function (evt) {
-      // console.log("event pointerup", evt);
-      canvasPressed = false;
-    });
-    canvas.addEventListener("pointermove", function (evt) {
-      // console.log("event pointermove", evt);
-      if (canvasPressed) {
-        ctx.lineTo(evt.offsetX, evt.offsetY);
-        ctx.moveTo(evt.offsetX, evt.offsetY);
-        ctx.stroke();
-      }
+  useEffect(() => {
+    const navs = document.querySelectorAll("#app-header div");
+    const chat = document.querySelector("#messages-cont");
+    const cboard = document.querySelector("#canvas-cont");
+    // toggling Tabs
+    Array.from(navs).forEach((nav) => {
+      nav.addEventListener("click", (e) => {
+        if (e.target.id === "cboard") {
+          Array.from([chat]).forEach((elem) => {
+            if (!elem.classList.contains("hide")) {
+              elem.classList.toggle("hide");
+              cboard.classList.toggle("hide");
+            }
+          });
+        } else if (e.target.id === "chat") {
+          Array.from([cboard]).forEach((elem) => {
+            if (!elem.classList.contains("hide")) {
+              elem.classList.toggle("hide");
+              chat.classList.toggle("hide");
+            }
+          });
+        }
+      });
     });
   });
-
-
-  
-  const Pressing = () => {
-    socket.emit("keyPress", username);
+  const eraseLine = () => {
+    document.querySelector("#colorInput").value = "#ffffff";
+    document.querySelector("#lineSize").value = 6;
+    currentColor();
+  };
+  const currentColor = () => {
+  document.querySelector("#colorSelector").style.backgroundColor = document.querySelector("#colorInput").value;
   };
 
   useEffect(() => {
-    lastEl.current.scrollIntoView({ behavior: "smooth" });
-    inputEl.current.focus();
-  });
+    const lineColor = document.querySelector("#colorInput");
+    const lineWidth = document.querySelector("#lineSize");
+    var canvas = document.getElementById("canvas-board");
+    var ctx = canvas.getContext("2d");
+    ctx.strokeStyle = lineColor;
+    ctx.lineWidth = lineWidth;
+    // resizing
+    window.addEventListener("resize", () => {
+      canvas.height = window.innerHeight - 113;
+      canvas.width = window.innerWidth;
+    });
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight - 113;
+    // variables
+    let painting = false;
+
+    // functions
+    function startPosition(e) {
+      painting = true;
+      socket.emit("pointerdown", {
+        clientX: e.clientX,
+        clientY: e.clientY,
+        username,
+      });
+      draw(e);
+    }
+
+    function endPosition() {
+      painting = false;
+      ctx.beginPath();
+    }
+    // socket.emit("pointerup", false);
+
+    function draw(e) {
+      if (!painting) {
+        return;
+      }
+      e.preventDefault();
+      e.stopPropagation();
+      ctx.lineWidth = lineWidth.value;
+      ctx.lineCap = "round";
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+      ctx.strokeStyle = lineColor.value;
+      ctx.beginPath();
+      ctx.moveTo(e.offsetX, e.offsetY);
+      socket.emit("pointermove", {
+        offsetX: e.offsetX,
+        offsetY: e.offsetY,
+        username,
+      });
+    }
+
+    //  event listeners
+    canvas.addEventListener("mousedown", startPosition);
+    canvas.addEventListener("touchstart", startPosition);
+    canvas.addEventListener("mouseup", endPosition);
+    canvas.addEventListener("touchend", endPosition);
+    canvas.addEventListener("mousemove", draw);
+    canvas.addEventListener(
+      "touchmove",
+
+      function (e) {
+        var touch = e.touches[0];
+        let r = canvas.getBoundingClientRect();
+        var mouseEvent = new MouseEvent("mousemove", {
+          clientX: touch.clientX - r.left,
+          clientY: touch.clientY - r.top,
+        });
+        draw(mouseEvent);
+      },
+      false
+    );
+    socket.on("penStart", (e) => {
+      if (e.username === username) {
+        return;
+      }
+      ctx.lineWidth = lineWidth.value;
+      ctx.lineCap = "round";
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+      ctx.strokeStyle = lineColor.value;
+      ctx.beginPath();
+      ctx.moveTo(e.offsetX, e.offsetY);
+    });
+    socket.on("penStop", () => {
+      painting = false;
+      ctx.beginPath();
+    });
+    socket.on("penMove", (e) => {
+      if (e.username === username) {
+        return;
+      }
+      ctx.lineWidth = lineWidth.value;
+      ctx.lineCap = "round";
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+      ctx.strokeStyle = lineColor.value;
+      ctx.beginPath();
+      ctx.moveTo(e.offsetX, e.offsetY);
+    });
+  }, []);
 
   useEffect(() => {
     socket.on("typing", (data) => {
@@ -68,9 +171,10 @@ export default function ChatRoom({ socket }) {
       }
       setTimeout(() => setTyping(""), 2000);
     });
-
     // if (!socket.io.opts.query.room) navigate("/");
     socket.on(NEW_MESSAGE_EVENT, (data) => {
+      lastEl.current.scrollIntoView({ behavior: "smooth" });
+
       const incoming = {
         ...data,
         status: data.id === socket.id ? "sent" : "received",
@@ -82,6 +186,14 @@ export default function ChatRoom({ socket }) {
     });
   }, []);
 
+  const clearCanva = () => {
+    var canvas = document.getElementById("canvas-board");
+    var ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  };
+  const Pressing = () => {
+    socket.emit("keyPress", username);
+  };
   const showMe = (data) => {
     const newU = document.querySelector("#messages-cont");
     const div = document.createElement("div");
@@ -108,77 +220,77 @@ export default function ChatRoom({ socket }) {
   };
 
   const sendMSg = (e) => {
+    lastEl.current.scrollIntoView({ behavior: "smooth" });
     e.preventDefault();
     if (myMsg.msg) socket.emit(MESSAGE_EVENT, { ...myMsg });
     setMyMsg({ ...myMsg, msg: "" });
   };
-
-
-
   return (
-    <div id="chatroom-cont">
-      <header id="chat-header">
-        <h2 id="room-name">{room} Room</h2>
-      </header>
-      <section id="chat-body">
-        <div id="messages-cont">
-          <div id="welcome-msg">
-            <span>
-              Lorem, ipsum dolor Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Enim .
-            </span>
-            <sub>Javascript</sub>
+    <>
+      <Header />
+      <div id="chatroom-cont">
+        <section id="chat-body">
+          <div id="messages-cont" className="containers">
+            {messages.map((message, i) => {
+              return <MessagesBox message={message} key={i} />;
+            })}
+            <div id="last-msg" ref={lastEl}>
+              <Typing typing={typing} />
+            </div>
           </div>
-          {messages.map((message, i) => {
-            return (
-              <div key={i} className={message.status} id="all-msg">
-                <span id={"from"}> {message.username}</span>
-                <div className="message-item">{message.msg}</div>
-              </div>
-            );
-          })}
-          <div id="last-msg" ref={lastEl}>
-            <small
-              style={{
-                opacity: "0.3",
-                marginLeft: "12px",
-              }}
-            >
-              {typing ? `${typing}  is typing` : ""}
-            </small>
-          </div>
-        </div>
-        <div id="canvas-cont">
-          <canvas id="can" width="400" height="400"></canvas>
-          <div id="tools">
-            <input type="color" id="colors"/>
-            <input type="number" id="size"  placeholder="size"/>
-            <input type="button" id="clear-btn" value="clear"/>
-          </div>
-        </div>
-      </section>
+          <div id="canvas-cont" className="hide">
+            <div id="toolbox">
 
-      <footer id="chat-foot">
-        <form id="chat-form" onSubmit={sendMSg}>
-          <input
-            id="msg-input"
-            type="text"
-            name="msg"
-            ref={inputEl}
-            value={myMsg.msg}
-            onKeyDown={() => {
-              Pressing();
-            }}
-            onChange={(e) => {
-              setMyMsg({
-                ...myMsg,
-                msg: e.target.value,
-              });
-            }}
-          />
-          <input type="submit" name="send-btn" id="send-btn" value={"Send"} />
-        </form>
-      </footer>
-    </div>
+              <Button id="lineSize"
+                pl="3"
+                cls="tools" type="number" />
+
+              <Button
+                id="colorInput"
+                cls="tools"
+                txt="erase"
+                type="color"
+                func={currentColor}
+              />
+
+              <Button
+                src={colorPalette}
+                func={() => document.querySelector("#colorInput").click()}
+                className={"tools"}
+                cls="tools"
+                id={"colorSelector"}
+                value={"black"}
+                onclick
+              />
+              <Button
+                src={eraser}
+                id="eraser"
+                cls="tools"
+                func={() => {
+                  eraseLine();
+                }}
+                onclick
+              />
+              <Button
+                src={reset}
+                id="clearAll"
+                cls="tools"
+                func={() => clearCanva()}
+                onclick
+              />
+              <div />
+            </div>
+            <canvas id="canvas-board"></canvas>
+          </div>
+        </section>
+        <Footer
+          sendMSg={sendMSg}
+          Pressing={Pressing}
+          setMyMsg={setMyMsg}
+          myMsg={myMsg}
+          inputEl={inputEl}
+        />
+      </div>
+    </>
   );
 }

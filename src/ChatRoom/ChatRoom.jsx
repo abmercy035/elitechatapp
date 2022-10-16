@@ -241,8 +241,12 @@ export default function ChatRoom({ socket }) {
           </div>
           <div id="canvas-cont" className="hide">
             <div id="toolbox">
-              <Button id="lineSize" cls="tools" type="number" value={3} />
-              <input
+
+              <Button id="lineSize"
+                pl="3"
+                cls="tools" type="number" />
+
+              <Button
                 id="colorInput"
                 cls="tools"
                 txt="erase"

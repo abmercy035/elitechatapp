@@ -79,7 +79,6 @@
 }
 
 #canvas-board{
-  border: 1px red solid;
   position: absolute;
   z-index: -1;
   top: 0;

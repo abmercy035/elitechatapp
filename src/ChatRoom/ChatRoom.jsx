@@ -25,19 +25,7 @@ export default function ChatRoom({ socket }) {
     username,
   });
 
-  // let color = "black";
-  // let strokeSize = 1;
-
-  // function changeColor(data) {
-  //   color = data;
-  // }
-  // function changeSize(width) {
-  //   strokeSize = width;
-  // }
-
-  useEffect( () =>
-  {
-    
+  useEffect(() => {
     const navs = document.querySelectorAll("#app-header div");
     const chat = document.querySelector("#messages-cont");
     const cboard = document.querySelector("#canvas-cont");
@@ -62,29 +50,42 @@ export default function ChatRoom({ socket }) {
       });
     });
   });
-  useEffect( () =>
-  {
-    const lineColor = document.querySelector( '#colorInput' );
-    const lineWidth = document.querySelector( '#lineSize' );
+  const eraseLine = () => {
+    document.querySelector("#colorInput").value = "#ffffff";
+    document.querySelector("#lineSize").value = 6;
+    currentColor();
+  };
+  const currentColor = () => {
+    document.querySelector("#colorSelector").style.backgroundColor =
+      document.querySelector("#colorInput").value;
+  };
 
+  useEffect(() => {
+    const lineColor = document.querySelector("#colorInput");
+    const lineWidth = document.querySelector("#lineSize");
     var canvas = document.getElementById("canvas-board");
     var ctx = canvas.getContext("2d");
     ctx.strokeStyle = lineColor;
     ctx.lineWidth = lineWidth;
     // resizing
     window.addEventListener("resize", () => {
-      canvas.height = window.innerHeight;
+      canvas.height = window.innerHeight - 113;
       canvas.width = window.innerWidth;
     });
-    canvas.height = window.innerHeight;
+
     canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight - 113;
     // variables
     let painting = false;
 
     // functions
     function startPosition(e) {
       painting = true;
-      socket.emit("pointerdown", { clientX: e.clientX, clientY: e.clientY, username });
+      socket.emit("pointerdown", {
+        clientX: e.clientX,
+        clientY: e.clientY,
+        username,
+      });
       draw(e);
     }
 
@@ -104,10 +105,14 @@ export default function ChatRoom({ socket }) {
       ctx.lineCap = "round";
       ctx.lineTo(e.offsetX, e.offsetY);
       ctx.stroke();
-      ctx.strokeStyle = lineColor.value;;
+      ctx.strokeStyle = lineColor.value;
       ctx.beginPath();
-      ctx.moveTo( e.offsetX, e.offsetY );
-      socket.emit("pointermove", { offsetX: e.offsetX, offsetY: e.offsetY, username });
+      ctx.moveTo(e.offsetX, e.offsetY);
+      socket.emit("pointermove", {
+        offsetX: e.offsetX,
+        offsetY: e.offsetY,
+        username,
+      });
     }
 
     //  event listeners
@@ -130,11 +135,8 @@ export default function ChatRoom({ socket }) {
       },
       false
     );
-    socket.on( "penStart", ( e ) =>
-    {
-      console.log(e.username + "1")
+    socket.on("penStart", (e) => {
       if (e.username === username) {
-        console.log(e.username + "2")
         return;
       }
       ctx.lineWidth = lineWidth.value;
@@ -149,10 +151,8 @@ export default function ChatRoom({ socket }) {
       painting = data;
       ctx.beginPath();
     });
-    socket.on( "penMove", ( e ) =>
-    {
+    socket.on("penMove", (e) => {
       if (e.username === username) {
-        console.log(e.username + "2")
         return;
       }
       ctx.lineWidth = lineWidth.value;
@@ -185,8 +185,7 @@ export default function ChatRoom({ socket }) {
     socket.on(USER_JOINED_EVENT, (data) => {
       data.id !== socket.id ? showMe(data) : show(data);
     });
-  }, [] );
-  
+  }, []);
 
   const clearCanva = () => {
     var canvas = document.getElementById("canvas-board");
@@ -243,28 +242,14 @@ export default function ChatRoom({ socket }) {
           </div>
           <div id="canvas-cont" className="hide">
             <div id="toolbox">
-              <Button
-                id="lineSize"
-                cls="tools"
-                type="number"
-                // value={lineWidth}
-                // func={(e) => setLineWidth(e.target.value)}
-              />
-              {/* <Button
-                id="colorInput"
-                cls="tools"
-                txt="erase"
-                type="color"
-                value={lineColor}
-                func={(e) => setLineColor(e.target.value)}
-              /> */}
+              <Button id="lineSize" cls="tools" type="number" value={3} />
+
               <input
                 id="colorInput"
                 cls="tools"
                 txt="erase"
                 type="color"
-                // value={lineColor}
-                // onChange={(e) => setLineColor(e.target.value)}
+                onChange={currentColor}
               />
 
               <Button
@@ -273,6 +258,7 @@ export default function ChatRoom({ socket }) {
                 className={"tools"}
                 cls="tools"
                 id={"colorSelector"}
+                value={"black"}
                 onclick
               />
               <Button
@@ -280,8 +266,7 @@ export default function ChatRoom({ socket }) {
                 id="eraser"
                 cls="tools"
                 func={() => {
-                  // setLineColor("white");
-                  console.log(lineColor);
+                  eraseLine();
                 }}
                 onclick
               />

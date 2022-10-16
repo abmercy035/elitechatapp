@@ -138,6 +138,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  border: 1px red solid;
 }
 #chat-form {
   height: 80%;

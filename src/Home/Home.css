@@ -76,6 +76,7 @@ select {
 .username-input::placeholder {
   padding: 0 5px;
   color: var(--bls);
+  font-weight: 600;
 }
 #submit-input {
   background-color: var(--rbs);

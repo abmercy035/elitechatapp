@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ChatRoom.css";
+import "./canva.css";
 export default function ChatRoom({ socket }) {
   const navigate = useNavigate();
   const inputEl = useRef(null);
@@ -16,6 +17,41 @@ export default function ChatRoom({ socket }) {
     username,
   });
 
+
+  
+  window.addEventListener("load", () => {
+    var canvas = document.getElementById("can");
+    var canvasPressed = false;
+    var ctx = canvas.getContext("2d");
+    ctx.strokeStyle ="red"
+    ctx.lineWidth ="5"
+
+
+
+    canvas.addEventListener("pointerdown", function (evt) {
+      // console.log("event pointerdown", evt);
+      canvasPressed = true;
+      ctx.beginPath();
+      ctx.moveTo(evt.offsetX, evt.offsetY);
+
+      // console.log(evt.offsetX, evt.offsetY)
+    });
+    canvas.addEventListener("pointerup", function (evt) {
+      // console.log("event pointerup", evt);
+      canvasPressed = false;
+    });
+    canvas.addEventListener("pointermove", function (evt) {
+      // console.log("event pointermove", evt);
+      if (canvasPressed) {
+        ctx.lineTo(evt.offsetX, evt.offsetY);
+        ctx.moveTo(evt.offsetX, evt.offsetY);
+        ctx.stroke();
+      }
+    });
+  });
+
+
+  
   const Pressing = () => {
     socket.emit("keyPress", username);
   };
@@ -33,7 +69,7 @@ export default function ChatRoom({ socket }) {
       setTimeout(() => setTyping(""), 2000);
     });
 
-    if (!socket.io.opts.query.room) navigate("/");
+    // if (!socket.io.opts.query.room) navigate("/");
     socket.on(NEW_MESSAGE_EVENT, (data) => {
       const incoming = {
         ...data,
@@ -77,6 +113,8 @@ export default function ChatRoom({ socket }) {
     setMyMsg({ ...myMsg, msg: "" });
   };
 
+
+
   return (
     <div id="chatroom-cont">
       <header id="chat-header">
@@ -108,6 +146,14 @@ export default function ChatRoom({ socket }) {
             >
               {typing ? `${typing}  is typing` : ""}
             </small>
+          </div>
+        </div>
+        <div id="canvas-cont">
+          <canvas id="can" width="400" height="400"></canvas>
+          <div id="tools">
+            <input type="color" id="colors"/>
+            <input type="number" id="size"  placeholder="size"/>
+            <input type="button" id="clear-btn" value="clear"/>
           </div>
         </div>
       </section>

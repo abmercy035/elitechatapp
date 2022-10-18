@@ -1,64 +1,59 @@
-import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
+import React from "react";
 import "./Home.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Home = ({ sendRoom }) => {
-  const [roomName, setRoomName] = React.useState("");
+export default function Home({ sendLoginDetails }) {
   const navigate = useNavigate();
+  const [username, setUsername] = useState();
+  const [room, setRoom] = useState();
 
-  const handleRoomNameChange = (event) => {
-    setRoomName(event.target.value);
+  const Login = (e) => {
+    sendLoginDetails({ username, room });
+    localStorage.setItem("username", username);
+    e.preventDefault();
+    if (username && room) {
+      navigate("/chat");
+    }
   };
 
   return (
-    <div className="home-container">
+    <div id="login-cont">
+      {/* <header id="login-header">
+        <h2 id="comp-name"> Chat App </h2>
+      </header> */}
+      <div id="login-logo"></div>
+      <div id="form-cont">
+        <div id="login-msg">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos
+          provident doloremque repellendus hic. Quia quidem voluptatum neque
+          modi dolor aspernatur?
+        </div>
 
-<header id="login-header">
-        <h3>Elite Chat App</h3>
-      </header>
-      <blockquote>
-        Hello welcome to Elite multipurpose Chat App the App is mainly for students,
-        Stay with us as we integrate
-        more other functions that will benefit and aid efficient study.
-      <blockquote>
-        <b>Today will be An Anonymous Night to test the capability of this App. Thank you </b>
-      </blockquote>
-      </blockquote>
-
-      <select
-        type="text"
-        placeholder="Room"
-        value={roomName}
-        onChange={handleRoomNameChange}
-        className="text-input-field"
-      >
-        <option value="" disabled>
-          Select A Room
-        </option>
-        <optgroup label="anonymous 9:00-pm">
-          <option value="anonymous">Anonymous</option>
-          {/* <option value="Anonymous-200lvl">Anonymous 200lvl 8:00-pm</option> */}
-        </optgroup>
-        {/* <optgroup label="Scholars-Forum 8:00-pm">
-
-        <option value="scoholars-forum-100lvl">Scholars 100 level</option>
-        <option value="scoholars-forum-200lvl">Scholars 200 level</option>
-        </optgroup>
-        <option value="Counciling-forum">Council Group 9:00-pm</option> */}
-      </select>
-
-      <button
-        onClick={() => {
-          sendRoom(roomName);
-          roomName && navigate("/chat");
-        }}
-        className="enter-room-button"
-      >
-        Join room
-      </button>
+        <div id="login-form-cont">
+          <form action="#" id="login-form" onSubmit={Login}>
+            <input
+              type="text"
+              className="username-input"
+              placeholder="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          
+            <input
+              type="text"
+              id="room-input"
+              placeholder="Enter Room"
+              value={room}
+              onChange={(e) => setRoom(e.target.value)}
+            />
+            <input type="submit" id="submit-input" value="submit" />
+          </form>
+        </div>
+      </div>
+      <footer id="login-foot">
+     <span><b>Mega-Brain</b> Developers With Brain</span>
+      </footer>
     </div>
   );
-};
-
-export default Home;
+}

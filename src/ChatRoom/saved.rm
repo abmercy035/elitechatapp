@@ -1,0 +1,157 @@
+
+    // canvas.addEventListener("touchdown", function (evt) {
+    //   var touch = evt.touches[0];
+
+    //   socket.emit("pointerdown", {
+    //     x: evt.touch.clientX,
+    //     y: evt.touch.clientY,
+    //   });
+    //   canvasPressed = true;
+    //   ctx.beginPath();
+    //   ctx.moveTo(evt.touch.clientX, evt.touch.clientY);
+    // });
+    // canvas.addEventListener("touchup", function (evt) {
+    //   socket.emit("pointerup", "false");
+    //   canvasPressed = false;
+    // });
+    // canvas.addEventListener("touchmove", function (evt) {
+    //   var touch = evt.touches[0];
+
+    //   if (canvasPressed) {
+    //     socket.emit("pointermove", {
+    //       y: evt.touch.clientY,
+    //       x: evt.touch.clientX,
+    //     });
+    //     ctx.lineTo(evt.touch.clientX, evt.touch.clientY);
+    //     ctx.moveTo(evt.touch.clientX, evt.touch.clientY);
+    //     ctx.stroke();
+    //   }
+    // });
+    // // });
+
+    // if (!canvasPressed) {
+    //   socket.on("penStart", (data) => {
+    //     ctx.beginPath();
+    //     ctx.moveTo(data.x, data.y);
+    //   });
+    //   socket.on("penStop", (data) => {
+    //     canvasPressed = data;
+    //   });
+    //   socket.on("penMove", (data) => {
+    //     ctx.lineTo(data.x, data.y);
+    //     ctx.moveTo(data.x, data.y);
+    //     ctx.stroke();
+    //   });
+    // }
+
+
+
+
+
+          {/* <div id="b" className="containers hide">
+          <canvas id="can" width="400" height="400"></canvas>
+          <div id="tools">
+            <input type="color" id="colors" />
+            <input type="number" id="size" placeholder="size" />
+            <input type="button" id="clear-btn" value="clear" />
+          </div>
+        </div>
+        <div id="online" className="containers hide">
+          <canvas id="can" width="400" height="400"></canvas>
+          <div id="tools">
+            <input type="color" id="colors" />
+            <input type="number" id="size" placeholder="size" />
+            <input type="button" id="clear-btn" value="clear" />
+          </div>
+        </div> */}
+
+
+        
+          {/* <canvas id="can" width="500" height="500"></canvas>
+          <div id="tools">
+            <input
+              type="color"
+              id="colors"
+              onChange={(e) => setLineColor(e.target.value)}
+            />
+            <input
+              type="number"
+              id="size"
+              placeholder="size"
+              onChange={(e) => setLineWidth(e.target.value)}
+            />
+            <input
+              type="button"
+              id="clear-btn"
+              value="clear"
+              onClick={clearCanva}
+            />
+          </div> */}
+
+
+
+
+             {/*
+              <Button
+                id="lineSize"
+                cls="tools"
+                type="number"
+                value={lineWidth}
+                func={(e) => setLineWidth(e.target.value)}
+              /> 
+               <Button
+                id="colorInput"
+                cls="tools"
+                txt="erase"
+                type="color"
+                value={lineColor}
+                func={(e) => setLineColor(e.target.value)}
+              />              
+              <Button
+                src={colorPalette}
+                func={() => document.querySelector("#colorInput").click()}
+                className={"tools"}
+                cls="tools"
+                id={"colorSelector"}
+                onclick
+              />
+              <Button
+                src={eraser}
+                id="eraser"
+                cls="tools"
+                func={() => {
+                  setLineColor("white");
+                  console.log(lineColor);
+                }}
+                onclick
+              /> 
+
+
+
+
+                <select
+              className="username-input"
+              type="text"
+              placeholder="Room"
+              value={room}
+              onChange={(e) => setRoom(e.target.value)}
+            >
+              <option value="" disabled selected>
+                Select A Room
+              </option>
+              <optgroup label="anonymous 9:00-pm">
+                <option value="anonymous">Anonymous</option>
+                <option value="Anonymous-200lvl">Anonymous 200lvl</option>
+              </optgroup>
+              <optgroup label="Scholars-Forum 8:00-pm">
+                <option value="scoholars-forum-100lvl">
+                  scholars 100 level
+                </option>
+                <option value="scoholars-forum-200lvl">
+                  scholars 200 level
+                </option>
+              </optgroup>
+              <option value="Counciling-forum" >Council Group 9:00-pm</option>
+              <option value="enter room"> enter a different room </option>
+            </select>
+              */}

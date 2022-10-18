@@ -11,24 +11,25 @@ import colorPalette from "../img/color-palette.svg";
 import eraser from "../img/eraser.svg";
 import reset from "../img/reset.svg";
 export default function ChatRoom({ socket }) {
-  const navigate = useNavigate();
-  const inputEl = useRef(null);
-  const lastEl = useRef(null);
-  const MESSAGE_EVENT = "newMsg";
-  const USER_JOINED_EVENT = "joinedUser";
-  const NEW_MESSAGE_EVENT = "newChatMessage";
-  const room = socket.io.opts.query.room;
-  const username = localStorage.getItem("username");
-  const [messages, setMessages] = useState([]);
-  const [typing, setTyping] = useState();
-  const [myMsg, setMyMsg] = useState({
-    username,
-  });
+  const navigate = useNavigate(),
+    inputEl = useRef(null),
+    lastEl = useRef(null),
+    MESSAGE_EVENT = "newMsg",
+    USER_JOINED_EVENT = "joinedUser",
+    NEW_MESSAGE_EVENT = "newChatMessage",
+    room = socket.io.opts.query.room,
+    username = localStorage.getItem("username"),
+    [messages, setMessages] = useState([]),
+    [typing, setTyping] = useState(),
+    [myMsg, setMyMsg] = useState({
+      username,
+    });
 
   useEffect(() => {
-    const navs = document.querySelectorAll("#app-header div");
-    const chat = document.querySelector("#messages-cont");
-    const cboard = document.querySelector("#canvas-cont");
+    const navs = document.querySelectorAll("#app-header div"),
+      chat = document.querySelector("#messages-cont"),
+      cboard = document.querySelector("#canvas-cont");
+
     // toggling Tabs
     Array.from(navs).forEach((nav) => {
       nav.addEventListener("click", (e) => {
@@ -50,20 +51,22 @@ export default function ChatRoom({ socket }) {
       });
     });
   });
-  const eraseLine = () => {
-    document.querySelector("#colorInput").value = "#ffffff";
-    document.querySelector("#lineSize").value = 6;
-    currentColor();
-  };
+
   const currentColor = () => {
-  document.querySelector("#colorSelector").style.backgroundColor = document.querySelector("#colorInput").value;
-  };
+      document.querySelector("#colorSelector").style.backgroundColor =
+        document.querySelector("#colorInput").value;
+    },
+    eraseLine = () => {
+      document.querySelector("#colorInput").value = "#ffffff";
+      document.querySelector("#lineSize").value = 6;
+      currentColor();
+    };
 
   useEffect(() => {
     const lineColor = document.querySelector("#colorInput");
     const lineWidth = document.querySelector("#lineSize");
-    var canvas = document.getElementById("canvas-board");
-    var ctx = canvas.getContext("2d");
+    var canvas = document.getElementById( "canvas-board" ),
+      ctx = canvas.getContext( "2d" );
     ctx.strokeStyle = lineColor;
     ctx.lineWidth = lineWidth;
     // resizing
@@ -91,8 +94,8 @@ export default function ChatRoom({ socket }) {
     function endPosition() {
       painting = false;
       ctx.beginPath();
+      socket.emit("pointerup", false);
     }
-    // socket.emit("pointerup", false);
 
     function draw(e) {
       if (!painting) {
@@ -240,10 +243,7 @@ export default function ChatRoom({ socket }) {
           </div>
           <div id="canvas-cont" className="hide">
             <div id="toolbox">
-
-              <Button id="lineSize"
-                pl="3"
-                cls="tools" type="number" />
+              <Button id="lineSize" pl="3" cls="tools" type="number" />
 
               <Button
                 id="colorInput"

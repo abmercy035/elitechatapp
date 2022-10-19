@@ -138,7 +138,7 @@ export default function ChatRoom({ socket }) {
       false
     );
     socket.on("penStart", (e) => {
-      if (e.username) {
+      if (e.username === username) {
         return;
       }
       ctx.lineWidth = lineWidth.value;

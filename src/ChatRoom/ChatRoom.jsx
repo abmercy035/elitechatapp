@@ -94,7 +94,7 @@ export default function ChatRoom({ socket }) {
     function endPosition() {
       painting = false;
       ctx.beginPath();
-      // socket.emit("pointerup", false);
+      socket.emit("pointerup", false);
     }
 
     function draw(e) {

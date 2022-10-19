@@ -125,9 +125,17 @@
                 }}
                 onclick
               /> 
+<<<<<<< HEAD
               */}
 
                  <select
+=======
+
+
+
+
+                <select
+>>>>>>> 5fd8964ac6197adaaa7e8668dbc7b974b3f4d74d
               className="username-input"
               type="text"
               placeholder="Room"
@@ -151,4 +159,9 @@
               </optgroup>
               <option value="Counciling-forum" >Council Group 9:00-pm</option>
               <option value="enter room"> enter a different room </option>
+<<<<<<< HEAD
             </select>
+=======
+            </select>
+              */}
+>>>>>>> 5fd8964ac6197adaaa7e8668dbc7b974b3f4d74d

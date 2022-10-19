@@ -39,8 +39,7 @@ export default function Home({ sendLoginDetails }) {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
-         
-
+          
             <input
               type="text"
               id="room-input"
@@ -53,7 +52,7 @@ export default function Home({ sendLoginDetails }) {
         </div>
       </div>
       <footer id="login-foot">
-     <span><b>Mega-X</b> Improving Your World</span>
+     <span><b>Mega-Brain</b> Developers With Brain</span>
       </footer>
     </div>
   );

@@ -94,7 +94,7 @@ export default function ChatRoom({ socket }) {
     function endPosition() {
       painting = false;
       ctx.beginPath();
-      socket.emit("pointerup", false);
+      // socket.emit("pointerup", false);
     }
 
     function draw(e) {
@@ -138,7 +138,7 @@ export default function ChatRoom({ socket }) {
       false
     );
     socket.on("penStart", (e) => {
-      if (e.username === username) {
+      if (e.username) {
         return;
       }
       ctx.lineWidth = lineWidth.value;

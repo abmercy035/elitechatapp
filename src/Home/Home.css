@@ -25,7 +25,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: inset -4px 0px 5px var(--ash), inset 4px 4px 5px var(--ash);
+  box-shadow: inset -4px -0px 5px var(--ash), inset 4px -2px 5px var(--ash);
 }
 
 #form-cont {
@@ -95,12 +95,12 @@ select {
   justify-content: center;
 }
 #login-foot > span {
-  /* background: #7f7fd5; */
-  /* background: -webkit-linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5); */
-  /* background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5); */
-  /* background-clip: text; */
-  /* -webkit-background-clip: text; */
-  /* -webkit-text-fill-color: transparent; */
+  background: #7f7fd5;
+  background: -webkit-linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
+  background: linear-gradient(to right, #0256ff, #86a8e7, #d5c703);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-variant-caps: all-petite-caps;
   color: var(--wh);
 }

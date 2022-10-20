@@ -87,6 +87,8 @@ export default function ChatRoom({ socket }) {
         clientX: e.clientX,
         clientY: e.clientY,
         username,
+        lineColor: lineColor.value,
+        lineWidth: lineWidth.value
       });
       draw(e);
     }
@@ -138,12 +140,11 @@ export default function ChatRoom({ socket }) {
       false
     );
     socket.on("penStart", (e) => {
-     
-      ctx.lineWidth = lineWidth.value;
+      ctx.lineWidth = e.lineWidth;
       ctx.lineCap = "round";
       ctx.lineTo(e.offsetX, e.offsetY);
       ctx.stroke();
-      ctx.strokeStyle = lineColor.value;
+      ctx.strokeStyle = e.lineColor;
       ctx.beginPath();
       ctx.moveTo(e.offsetX, e.offsetY);
     });
@@ -152,11 +153,9 @@ export default function ChatRoom({ socket }) {
       ctx.beginPath();
     });
     socket.on("penMove", (e) => {
-      ctx.lineWidth = lineWidth.value;
       ctx.lineCap = "round";
       ctx.lineTo(e.offsetX, e.offsetY);
       ctx.stroke();
-      ctx.strokeStyle = lineColor.value;
       ctx.beginPath();
       ctx.moveTo(e.offsetX, e.offsetY);
     });

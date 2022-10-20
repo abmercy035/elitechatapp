@@ -1,0 +1,106 @@
+#login-cont {
+  height: 100vh;
+  width: 100%;
+  background-color: var(--bls);
+  color: var(--wh);
+  display: grid;
+  grid-template-areas:
+    "showImg"
+    "form-cont"
+    "foot";
+}
+
+#login-logo {
+  grid-area: "showImg";
+  background-image: url("../img/bg.svg");
+  background-position: center;
+  background-size: 200px;
+  background-repeat: no-repeat;
+  background-color: var(--wh);
+  color: var(--bls);
+  width: 100%;
+  height: 55vh;
+  font-size: 80px;
+  font-weight: 900;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset -4px -0px 5px var(--ash), inset 4px -2px 5px var(--ash);
+}
+
+#form-cont {
+  grid-area: "form-cont";
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+#login-msg {
+  width: 80%;
+  font-size: 15px;
+  height: fit-content;
+  text-align: justify;
+  word-break: break-all;
+  cursor: default;
+}
+
+#login-form-cont {
+  width: 100%;
+}
+#login-form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+#login-form input,
+select {
+  width: 100%;
+  height: 5vh;
+  border-radius: 4px;
+  margin: 5px auto;
+  font-weight: 700;
+  border: 0;
+  font-size: 19px;
+}
+#room-input,
+.username-input {
+  padding: 0 15px;
+}
+#room-input::placeholder,
+.username-input::placeholder {
+  padding: 0 5px;
+  color: var(--bls);
+  font-weight: 600;
+}
+#submit-input {
+  background-color: var(--rbs);
+  box-shadow: 0px 0px 2px var(--rb), inset 0px 0px 5px var(--ash);
+  text-align: center;
+  color: var(--wh);
+  font-variant: small-caps;
+}
+
+#login-foot {
+  grid-area: "foot";
+  height: 5vh;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+#login-foot > span {
+  background: #7f7fd5;
+  background: -webkit-linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
+  background: linear-gradient(to right, #0256ff, #86a8e7, #d5c703);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-variant-caps: all-petite-caps;
+  color: var(--wh);
+}

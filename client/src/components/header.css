@@ -1,0 +1,53 @@
+
+#chat-header {
+  height: 5vh;
+  background-color: var(--bl);
+  margin: 0 auto 0px;
+  color: var(--rb);
+  width: 100vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+#app-header{
+  height: 5vh;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  color: var(--rbs);
+font-variant: small-caps;
+justify-content: center;
+align-items: center;
+}
+#app-header > div{
+display: flex;
+justify-content: center;
+align-items: center;
+font-weight: 600;
+text-shadow: 0px 0px 2px var(--ash);
+border-left: 1px var(--ash) solid;
+}
+#app-header > div:hover{
+color : black;
+font-weight: 900;
+}
+
+#chat{
+  background-image: url("../img/chat-icon.svg");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: var(--wh);
+  height: 80%;
+}
+#cboard{
+  background-image: url("../img/drawing-icon.svg");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* background-color: var(--wh); */
+  height: 80%;
+}

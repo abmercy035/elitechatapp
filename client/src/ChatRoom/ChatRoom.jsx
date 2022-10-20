@@ -10,6 +10,7 @@ import Header from "../components/Header";
 import colorPalette from "../img/color-palette.svg";
 import eraser from "../img/eraser.svg";
 import reset from "../img/reset.svg";
+import Messages from "../components/Messages";
 export default function ChatRoom({ socket }) {
   const navigate = useNavigate(),
     inputEl = useRef(null),
@@ -177,8 +178,12 @@ export default function ChatRoom({ socket }) {
       setTimeout(() => setTyping(""), 2000);
     });
     // if (!socket.io.opts.query.room) navigate("/");
-    socket.on(NEW_MESSAGE_EVENT, (data) => {
+    socket.on( NEW_MESSAGE_EVENT, ( data ) =>
+    {
+      console.log("data")
+      
       lastEl.current.scrollIntoView({ behavior: "smooth" });
+      console.log('heu')
 
       const incoming = {
         ...data,
@@ -189,7 +194,7 @@ export default function ChatRoom({ socket }) {
     socket.on(USER_JOINED_EVENT, (data) => {
       data.id !== socket.id ? showMe(data) : show(data);
     });
-  }, []);
+  });
 
   const clearCanva = () =>
   {
@@ -238,6 +243,7 @@ export default function ChatRoom({ socket }) {
       <div id="chatroom-cont">
         <section id="chat-body">
           <div id="messages-cont" className="containers">
+            {/* <Messages messages={ messages } /> */}
             {messages.map((message, i) => {
               return <MessagesBox message={message} key={i} />;
             })}

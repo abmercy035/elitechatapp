@@ -161,7 +161,9 @@ export default function ChatRoom({ socket }) {
       ctx.moveTo(e.offsetX, e.offsetY);
     } );
     
-    socket.on("clearCanva", () => {
+    socket.on( "clearCanva", () =>
+    {
+      console.log("clear")
       var canvas = document.getElementById("canvas-board");
       var ctx = canvas.getContext("2d");
       ctx.clearRect( 0, 0, canvas.width, canvas.height );

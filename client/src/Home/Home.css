@@ -25,7 +25,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: inset -4px -0px 5px var(--ash), inset 4px -2px 5px var(--ash);
+  /* box-shadow: inset -4px -0px 5px var(--ash), inset 4px -2px 5px var(--ash); */
 }
 
 #form-cont {

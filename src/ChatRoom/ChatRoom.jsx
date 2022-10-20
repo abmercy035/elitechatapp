@@ -138,9 +138,7 @@ export default function ChatRoom({ socket }) {
       false
     );
     socket.on("penStart", (e) => {
-      if (e.username === username) {
-        return;
-      }
+     
       ctx.lineWidth = lineWidth.value;
       ctx.lineCap = "round";
       ctx.lineTo(e.offsetX, e.offsetY);
@@ -149,14 +147,11 @@ export default function ChatRoom({ socket }) {
       ctx.beginPath();
       ctx.moveTo(e.offsetX, e.offsetY);
     });
-    socket.on("penStop", () => {
-      painting = false;
+    socket.on("penStop", (data) => {
+      painting = data;
       ctx.beginPath();
     });
     socket.on("penMove", (e) => {
-      if (e.username === username) {
-        return;
-      }
       ctx.lineWidth = lineWidth.value;
       ctx.lineCap = "round";
       ctx.lineTo(e.offsetX, e.offsetY);
